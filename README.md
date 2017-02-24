@@ -36,12 +36,24 @@ my-app/
     index.html
     favicon.ico
   src/
-    App.css
+    actions/
+      ...
+    assets/
+      index.css
+      App.css
+      logo.svg
+    components/
+      ...
+    configs/
+      ...
+    reduxers/
+      ...
+    store/
+      ...
     App.js
     App.test.js
-    index.css
     index.js
-    logo.svg
+    
 ```
 
 For the project to build, **these files must exist with exact filenames**:
