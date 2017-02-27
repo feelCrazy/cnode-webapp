@@ -25,6 +25,7 @@ class HomePage extends Component {
         });
     };
 
+
     render() {
         console.log(this.props);
         return (

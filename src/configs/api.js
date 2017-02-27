@@ -11,6 +11,7 @@ export const user = 'user/';  // 用户详情
 export const message = '/message/count';  // 获取未读消息数
 export const allMessage = '/messages';  // 获取所有消息
 export const markMessage = '/message/mark_all';  //标记所有消息为已读
+export const accesstoken = '/accesstoken'; //验证key
 
 
 export const getFetch = (url) => {

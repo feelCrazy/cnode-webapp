@@ -4,6 +4,8 @@
 import React, {Component} from 'react';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import {browserHistory} from 'react-router';
 
 const styles = {
     loginBtn: {
@@ -20,13 +22,17 @@ class Header extends Component {
         this.props.clickOpen();
     };
 
+    login = () => {
+        browserHistory.push('/login')
+    };
+
     render() {
         return (
             <div>
                 <AppBar title="Home"
                         onLeftIconButtonTouchTap={this.handleClick}
                         titleStyle={styles.title}
-                        iconElementRight={<Login/>}
+                        iconElementRight={<FlatButton label="LOGIN" onClick={this.login}/>}
                 >
                 </AppBar>
             </div>
@@ -35,7 +41,7 @@ class Header extends Component {
 }
 
 const Login = () => (
-    <div style={{marginTop:'5px'}}>
+    <div style={{marginTop: '5px'}}>
         <FlatButton style={styles.loginBtn} label="Login"/>
         <FlatButton style={styles.loginBtn} label="Login"/>
         <FlatButton style={styles.loginBtn} label="Login"/>
