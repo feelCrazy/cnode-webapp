@@ -5,7 +5,7 @@ import {Route, Router, browserHistory, IndexRoute} from 'react-router';
 import store from './store/store';
 import App from './App';
 import Home from './containers/HomePage';
-import Login  from './components/Login';
+import Login  from './containers/Login';
 import './assets/index.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();

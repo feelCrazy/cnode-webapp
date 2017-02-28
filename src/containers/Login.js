@@ -28,7 +28,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accesstoken: '199183d1-b722-4cc4-bdaa-5443b964f84c'
+            accesstoken: ''
         };
     }
 
