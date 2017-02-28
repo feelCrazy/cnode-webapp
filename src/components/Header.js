@@ -9,6 +9,8 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {browserHistory} from 'react-router';
+import NavigationBack from 'material-ui/svg-icons/navigation/arrow-back';
+import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 
 const styles = {
     loginBtn: {
@@ -33,9 +35,13 @@ class Header extends Component {
 
     render() {
         const userAcc = window.localStorage.getItem('userAcc');
+        const {title, goBack} =this.props;
         return (
             <div>
-                <AppBar title="Home"
+                <AppBar title={title}
+                        iconElementLeft={goBack ?
+                            <IconButton><NavigationBack/></IconButton> :
+                            <IconButton> <NavigationMenu/></IconButton>}
                         onLeftIconButtonTouchTap={this.clickOpen}
                         titleStyle={styles.title}
                         iconElementRight={userAcc !== null ?
@@ -64,7 +70,11 @@ const Logged = (props) => (
 
 
 Header.propTypes = {
-    clickOpen: React.PropTypes.func
+    clickOpen: React.PropTypes.func,
+    title: React.PropTypes.string.isRequired,
+    goBack: React.PropTypes.bool
 };
-Header.defaultProps = {};
+Header.defaultProps = {
+    goBack: false,
+};
 export default Header;

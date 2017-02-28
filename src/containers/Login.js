@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {userLogin} from '../actions/actions';
 import {browserHistory} from 'react-router';
+import Header from '../components/Header';
 
 const styles = {
     main: {
@@ -60,9 +61,15 @@ class Login extends Component {
         }
     };
 
+    handleBack = () => {
+        browserHistory.go(-1)
+    };
+
     render() {
         return (
             <div>
+                <Header clickOpen={this.handleBack}
+                        title="Login" goBack={true}/>
                 <div style={styles.main}>
                     <label>Key</label>
                     <TextField underlineFocusStyle={styles.unLine}
