@@ -27,10 +27,10 @@ class HomePage extends Component {
 
 
     render() {
-        console.log(this.props);
+        const {userState} = this.props;
         return (
             <div>
-                <Header clickOpen={this.handleOpen}/>
+                <Header clickOpen={this.handleOpen} isLogin={userState.isLogin}/>
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}
                             openDrawer={this.state.open}/>

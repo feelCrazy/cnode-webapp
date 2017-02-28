@@ -1,0 +1,28 @@
+{
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "es6": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  },
+  "plugins": [
+    "react",
+    "eslint-plugin-react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "react-app"
+  ]
+  //  "extends": ["eslint:recommended"]
+}

@@ -4,7 +4,10 @@
 import React, {Component} from 'react';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {browserHistory} from 'react-router';
 
 const styles = {
@@ -14,25 +17,29 @@ const styles = {
 };
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
 
-    handleClick = () => {
+
+    clickOpen = () => {
         this.props.clickOpen();
     };
 
     login = () => {
         browserHistory.push('/login')
     };
+    logout = () => {
+        window.localStorage.clear();
+        browserHistory.push('/')
+    };
 
     render() {
+        const userAcc = window.localStorage.getItem('userAcc');
         return (
             <div>
                 <AppBar title="Home"
-                        onLeftIconButtonTouchTap={this.handleClick}
+                        onLeftIconButtonTouchTap={this.clickOpen}
                         titleStyle={styles.title}
-                        iconElementRight={<FlatButton label="LOGIN" onClick={this.login}/>}
+                        iconElementRight={userAcc !== null ?
+                            <Logged logout={this.logout}/> : <FlatButton label="LOGIN" onClick={this.login}/>}
                 >
                 </AppBar>
             </div>
@@ -40,13 +47,18 @@ class Header extends Component {
     }
 }
 
-const Login = () => (
+const Logged = (props) => (
     <div style={{marginTop: '5px'}}>
-        <FlatButton style={styles.loginBtn} label="Login"/>
-        <FlatButton style={styles.loginBtn} label="Login"/>
-        <FlatButton style={styles.loginBtn} label="Login"/>
-        <FlatButton style={styles.loginBtn} label="Login"/>
-        <FlatButton style={styles.loginBtn} label="Login"/>
+        <IconMenu iconButtonElement={<IconButton iconStyle={styles.loginBtn}><MoreVertIcon/></IconButton>}
+                  targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                  anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
+
+            <MenuItem primaryText="Refresh"/>
+            <MenuItem primaryText="Send feedback"/>
+            <MenuItem primaryText="Settings"/>
+            <MenuItem primaryText="Help"/>
+            <MenuItem primaryText="Sign out" onClick={props.logout}/>
+        </IconMenu>
     </div>
 );
 

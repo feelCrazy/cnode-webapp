@@ -1,7 +1,7 @@
 /**
  * Created by ming on 2017/2/24
  */
-import {USER_LOGIN, FETCH_START, FETCH_SUCCESS, FETCH_FAILURE} from '../actions/types';
+import { FETCH_START, FETCH_SUCCESS, FETCH_FAILURE} from '../actions/types';
 import axios from 'axios';
 
 export const fetchStart = (res) => ({

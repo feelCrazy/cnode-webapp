@@ -7,9 +7,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
 class DrawerLeft extends Component {
-    constructor(props) {
-        super(props);
-    }
+
 
     render() {
         return (
