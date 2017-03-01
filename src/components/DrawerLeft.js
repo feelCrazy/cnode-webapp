@@ -27,7 +27,7 @@ class DrawerLeft extends Component {
         return (
             <div>
                 <Drawer docked={false}
-                        width={200}
+                        width={this.props.width}
                         open={this.props.openDrawer}
                         onRequestChange={this.props.toggleDrawer}>
 
@@ -37,7 +37,8 @@ class DrawerLeft extends Component {
                     </div>
 
                     <List>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Home"
+                        <ListItem style={{borderWidth: 1, borderColor: '#eee',}}
+                                  onTouchTap={this.props.toggleDrawer} primaryText="Home"
                                   leftIcon={<ActionHome/>}>
                         </ListItem>
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Hot"
@@ -46,6 +47,8 @@ class DrawerLeft extends Component {
                                   leftIcon={<Share/>}/>
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Job" leftIcon={<Job/>}/>
                         <Divider/>
+                    </List>
+                    <List>
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Message"
                                   leftIcon={<ContentMail/>}/>
                     </List>
@@ -58,9 +61,11 @@ class DrawerLeft extends Component {
 
 DrawerLeft.propTypes = {
     openDrawer: PropTypes.bool,
-    toggleDrawer: PropTypes.func
+    toggleDrawer: PropTypes.func,
+    width: PropTypes.number
 };
 DrawerLeft.defaultProps = {
-    openDrawer: false
+    openDrawer: false,
+    width: 200
 };
 export default DrawerLeft;

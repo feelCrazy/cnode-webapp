@@ -6,12 +6,29 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {userLogin} from '../actions/actions';
 import Header from '../components/Header';
-import  DrawerLeft from '../components/DrawerLeft';
+import DrawerLeft from '../components/DrawerLeft';
+import Paper from 'material-ui/Paper';
+import {ListItem, List} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 
 const styles = {
-    div: {
+    main: {
         height: 500,
-        backgroundColor: "#54cedd"
+        paddingTop: 15,
+        paddingLeft: 25,
+        paddingRight: 25,
+        display: "flex",
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+
+    },
+    left: {
+        width: "70%",
+        height: 200,
+    },
+    right: {
+        width: "25%",
+        height: 100
     }
 };
 
@@ -40,16 +57,42 @@ class HomePage extends Component {
                 <Header click={this.handleOpen}
                         title="Home"
                         isLogin={userState.isLogin}/>
-                <div style={styles.div}>
+                <div style={styles.main}>
+                    <Paper zDepth={2} style={styles.left}>
+                        <List>
+                            <ListItem primaryText={<TitleInfo/>}
+                                      leftAvatar={<Avatar style={{borderRadius: 5}}
+                                                          backgroundColor="#ddd"/>}/>
+                            <ListItem primaryText={<TitleInfo/>}
+                                      leftAvatar={<Avatar style={{borderRadius: 5}}
+                                                          backgroundColor="red"/>}/>
+                            <ListItem
+                                primaryText={<TitleInfo/>}
+                                leftAvatar={<Avatar style={{borderRadius: 5}}
+                                                    backgroundColor="green"/>}/>
+
+                        </List>
+                    </Paper>
+                    <Paper zDepth={2} style={styles.right}/>
 
                 </div>
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}
-                            openDrawer={this.state.open}/>
+                            openDrawer={this.state.open}
+                            width={300}
+                />
             </div>
         );
     }
 }
+
+const TitleInfo = (props) => (
+    <div>
+        <span>DDD</span>
+        <span style={{marginLeft: 20,}}>FFFFFfFF</span>
+    </div>
+);
+
 
 HomePage.propTypes = {};
 HomePage.defaultProps = {};
