@@ -8,6 +8,13 @@ import {userLogin} from '../actions/actions';
 import Header from '../components/Header';
 import  DrawerLeft from '../components/DrawerLeft';
 
+const styles = {
+    div: {
+        height: 500,
+        backgroundColor: "#54cedd"
+    }
+};
+
 class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +37,12 @@ class HomePage extends Component {
         const {userState} = this.props;
         return (
             <div>
-                <Header clickOpen={this.handleOpen} title="Home" isLogin={userState.isLogin}/>
+                <Header click={this.handleOpen}
+                        title="Home"
+                        isLogin={userState.isLogin}/>
+                <div style={styles.div}>
+
+                </div>
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}
                             openDrawer={this.state.open}/>

@@ -10,6 +10,11 @@ const muTheme = getMuiTheme({
         color: '#212121',
     },
     drawer: {},
+    badge:{
+        color:'#fff',
+        textColor:'#fff'
+    }
+
 });
 
 class App extends Component {

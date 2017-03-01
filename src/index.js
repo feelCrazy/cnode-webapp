@@ -6,6 +6,7 @@ import store from './store/store';
 import App from './App';
 import Home from './containers/HomePage';
 import Login  from './containers/Login';
+import HotPage from './containers/HotPage';
 import './assets/index.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -16,8 +17,10 @@ ReactDOM.render(
             <Route path="/" components={App}>
                 <IndexRoute components={Home}/>
                 <Route path="login" components={Login}/>
+                <Route path="hot" components={HotPage}/>
             </Route>
         </Router>
-    </Provider>,
+    </Provider>
+    ,
     document.getElementById('root')
 );

@@ -21,8 +21,8 @@ const styles = {
 class Header extends Component {
 
 
-    clickOpen = () => {
-        this.props.clickOpen();
+    handleClick = () => {
+        this.props.click();
     };
 
     login = () => {
@@ -42,7 +42,7 @@ class Header extends Component {
                         iconElementLeft={goBack ?
                             <IconButton><NavigationBack/></IconButton> :
                             <IconButton> <NavigationMenu/></IconButton>}
-                        onLeftIconButtonTouchTap={this.clickOpen}
+                        onLeftIconButtonTouchTap={this.handleClick}
                         titleStyle={styles.title}
                         iconElementRight={userAcc !== null ?
                             <Logged logout={this.logout}/> : <FlatButton label="LOGIN" onClick={this.login}/>}
@@ -70,7 +70,7 @@ const Logged = (props) => (
 
 
 Header.propTypes = {
-    clickOpen: React.PropTypes.func,
+    click: React.PropTypes.func,
     title: React.PropTypes.string.isRequired,
     goBack: React.PropTypes.bool
 };

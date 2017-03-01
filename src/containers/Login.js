@@ -34,7 +34,6 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        console.log(newProps);
         const {userState} = newProps
         if (userState.isLogin && userState.res !== undefined) {
             const accesstoken = this.state.accesstoken;
@@ -50,7 +49,7 @@ class Login extends Component {
     handleChange = (e) => {
         const name = e.target.name;
         this.setState({
-            [name]: e.target.value,
+            [name]: e.target.value.trim(),
         });
     };
 
@@ -68,7 +67,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <Header clickOpen={this.handleBack}
+                <Header click={this.handleBack}
                         title="Login" goBack={true}/>
                 <div style={styles.main}>
                     <label>Key</label>
