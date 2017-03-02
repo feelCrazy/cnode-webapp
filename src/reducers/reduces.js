@@ -26,7 +26,7 @@ export const articleReduce = (state = {isFetch: false, page: 0, topics: []}, act
                 let topics = state.topics;
                 action.topics = topics.concat(action.topics)
             }
-            return {...state, page: action.page, topics: action.topics, limit: action.limit};
+            return {...state, isFetch: false, page: action.page, topics: action.topics, limit: action.limit};
         default:
             return state;
     }

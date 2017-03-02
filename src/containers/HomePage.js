@@ -8,9 +8,7 @@ import {userLogin, getArticle} from '../actions/actions';
 import Header from '../components/Header';
 import DrawerLeft from '../components/DrawerLeft';
 import Paper from 'material-ui/Paper';
-import {ListItem, List} from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import Divider from 'material-ui/Divider';
+import ArticleList from '../components/ArticleList';
 
 const styles = {
     main: {
@@ -32,7 +30,8 @@ const styles = {
     },
     primaryText: {
         fontWeight: "bold",
-        paddingBottom: 10
+        paddingBottom: 10,
+        paddingLeft: 20,
     },
     secondaryText: {
         color: "#9d9d9d",
@@ -67,35 +66,20 @@ class HomePage extends Component {
 
     render() {
         const {userState, articleState} = this.props;
-        console.log(articleState);
         return (
             <div>
                 <Header click={this.handleOpen}
                         title="Home"
                         isLogin={userState.isLogin}/>
                 <div style={styles.main}>
-                    <Paper zDepth={2} style={styles.left}>
-                        <List>
-                            <ListItem primaryText={<Title/>}
-                                      secondaryText={<Info/>}
-                                      leftAvatar={<Avatar style={{borderRadius: 5}}
-                                                          backgroundColor="#ddd"/>}/>
-                            <Divider inset={true}/>
-                            <ListItem primaryText={<Title/>}
-                                      secondaryText={<Info/>}
-                                      leftAvatar={<Avatar style={{borderRadius: 5}}
-                                                          backgroundColor="red"/>}/>
-                            <Divider inset={true}/>
-                            <ListItem
-                                primaryText={<Title/>}
-                                secondaryText={<Info/>}
-                                leftAvatar={<Avatar style={{borderRadius: 5}}
-                                                    backgroundColor="green"/>}/>
-                            <Divider inset={true}/>
+                    <Paper zDepth={2}
+                           style={styles.left}>
 
-                        </List>
+                        <ArticleList data={articleState.topics} isFetch={articleState.isFetch}/>
+
                     </Paper>
-                    <Paper zDepth={2} style={styles.right}/>
+                    <Paper zDepth={2}
+                           style={styles.right}/>
 
                 </div>
 
@@ -108,26 +92,16 @@ class HomePage extends Component {
     }
 }
 
-const Title = (props) => (
-    <div style={styles.primaryText}>
-        <span style={{marginLeft: 20,}}>FFFFFfFF</span>
-    </div>
-);
-
-const Info = () => (
-    <div style={styles.secondaryText}>
-        <span>100/520</span>
-        <span style={{paddingLeft: 15}}>分享</span>
-    </div>
-);
-
-
-HomePage.propTypes = {};
+HomePage.propTypes = {
+    userAction: React.PropTypes.object,
+    userState: React.PropTypes.object,
+    articleState: React.PropTypes.object
+};
 HomePage.defaultProps = {};
 function mapStateToProps(state) {
     return {
         userState: state.userReduce,
-        articleState: state.articleReduce
+        articleState: state.articleReduce,
     }
 }
 
