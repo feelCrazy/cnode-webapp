@@ -4,3 +4,5 @@
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const REQUEST_TOPICS = 'REQUEST_TOPICS';
+export const RECEIVE_TOPICS = 'RECEIVE_TOPICS';
