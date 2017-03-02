@@ -1,21 +1,21 @@
 /**
  * Created by ming on 2017/2/24
  */
-import { FETCH_START, FETCH_SUCCESS, FETCH_FAILURE} from '../actions/types';
+import {LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE} from '../actions/types';
 import axios from 'axios';
 
 export const fetchStart = (res) => ({
-    type: FETCH_START,
+    type: LOGIN_START,
     res
 });
 
 export const fetchSuccess = (res) => ({
-    type: FETCH_SUCCESS,
+    type: LOGIN_SUCCESS,
     res
 });
 
 export const fetchFailure = (res) => ({
-    type: FETCH_FAILURE,
+    type: LOGIN_FAILURE,
     res
 });
 
@@ -33,6 +33,13 @@ export const userLogin = (key) => {
                 console.log(err);
                 dispatch(fetchFailure(err.data))
             })
+
+    }
+};
+
+export const getTopics = (name, nmb) => {
+    return dispatch => {
+
 
     }
 };

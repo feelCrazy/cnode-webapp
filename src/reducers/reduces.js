@@ -1,16 +1,16 @@
 /**
  * Created by ming on 2017/2/24
  */
-import {FETCH_FAILURE, FETCH_SUCCESS, FETCH_START} from '../actions/types';
+import {LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE} from '../actions/types';
 const initialState = {isLogin: false};
 
 export const userReduce = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_START:
+        case LOGIN_START:
             return {isLogin: true, res: action.res};
-        case FETCH_SUCCESS:
+        case LOGIN_SUCCESS:
             return {...state, isLogin: true, res: action.res};
-        case FETCH_FAILURE:
+        case LOGIN_FAILURE:
             return {...state, isLogin: false, res: action.res};
         default:
             return state;
