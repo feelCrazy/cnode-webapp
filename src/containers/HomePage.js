@@ -49,6 +49,10 @@ class HomePage extends Component {
         this.state = {open: false};
     }
 
+    componentDidMount() {
+        this.props.userAction.getArticle('good');
+    }
+
     toggleDrawer = () => {
         this.setState({
             open: !this.state.open,
@@ -78,11 +82,13 @@ class HomePage extends Component {
                                                           backgroundColor="#ddd"/>}/>
                             <Divider inset={true}/>
                             <ListItem primaryText={<Title/>}
+                                      secondaryText={<Info/>}
                                       leftAvatar={<Avatar style={{borderRadius: 5}}
                                                           backgroundColor="red"/>}/>
                             <Divider inset={true}/>
                             <ListItem
                                 primaryText={<Title/>}
+                                secondaryText={<Info/>}
                                 leftAvatar={<Avatar style={{borderRadius: 5}}
                                                     backgroundColor="green"/>}/>
                             <Divider inset={true}/>

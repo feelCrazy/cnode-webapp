@@ -39,7 +39,6 @@ export const userLogin = (key) => {
             accesstoken: key
         })
             .then(res => {
-                console.log(res);
                 dispatch(fetchSuccess(res.data))
             })
             .catch(err => {
@@ -56,7 +55,7 @@ export const getArticle = (name, page = 1, limit = 20,) => {
         axios.get(`/topics?tab=${name}&page=${page}&limit=${limit}`)
             .then(res => {
                 console.log(res);
-                dispatch(RECEIVE_TOPICS(name, res.data, page, limit))
+                dispatch(receiveTopics(name, res.data, page, limit))
             })
             .catch(err => {
                 console.log(err);
