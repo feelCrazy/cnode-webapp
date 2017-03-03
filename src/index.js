@@ -20,7 +20,5 @@ ReactDOM.render(
                 <Route path="hot" components={HotPage}/>
             </Route>
         </Router>
-    </Provider>
-    ,
-    document.getElementById('root')
+    </Provider>, document.getElementById('root')
 );

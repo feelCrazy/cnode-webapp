@@ -87,7 +87,6 @@ class HomePage extends Component {
 
                     <Paper zDepth={2}
                            style={styles.right}/>
-
                 </div>
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}

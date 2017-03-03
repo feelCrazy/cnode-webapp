@@ -45,7 +45,6 @@ export const userLogin = (key) => {
                 console.log(err);
                 dispatch(fetchFailure(err.data))
             })
-
     }
 };
 

@@ -1,7 +1,6 @@
 /**
  * Created by ming on 2017/3/2
  */
-
 import React, {Component, PropTypes} from 'react';
 import {ListItem, List} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
@@ -32,8 +31,6 @@ const styles = {
         overflow: "hidden",
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap'
-// text-overflow:"ellipsis",
-// white-space: "nowrap"
     }
 
 };
@@ -63,9 +60,7 @@ class ArticleList extends Component {
                                         <Divider inset={true}/>
                                     </div>
                                 ))}
-
                             </List>
-
                     }
                 </Paper>
             </div>

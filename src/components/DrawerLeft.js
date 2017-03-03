@@ -22,7 +22,6 @@ const styles = {
 
 class DrawerLeft extends Component {
 
-
     render() {
         return (
             <div>
