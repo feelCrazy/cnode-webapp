@@ -7,21 +7,38 @@ import {ListItem, List} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
+import Paper from 'material-ui/Paper';
 
 const styles = {
     primaryText: {
         fontWeight: "bold",
-        paddingBottom: 10,
-        paddingLeft: 20
+        paddingBottom: 15,
+        paddingLeft: 10,
     },
     secondaryText: {
         color: "#9d9d9d",
-        paddingLeft: 20,
         fontWeight: 'bold',
-        fontSize: 14
+        fontSize: 14,
+        paddingLeft: 10
+    },
+    avatar: {
+        borderRadius: 5,
+        backgroundColor: "#ddd"
+    },
+    title: {
+        display: "inline-block",
+        padding: 0,
+        width: "80%",
+        overflow: "hidden",
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+// text-overflow:"ellipsis",
+// white-space: "nowrap"
     }
 
 };
+
+const tab = {all: '全部', share: '分享', job: '招聘', good: '精华', ask: '问答'};
 
 class ArticleList extends Component {
     constructor(props) {
@@ -33,16 +50,24 @@ class ArticleList extends Component {
         const {isFetch, data} = this.props;
         return (
             <div>
-                {
-                    isFetch ? <div style={{textAlign: 'center'}}><CircularProgress size={60}/></div>
-                        : <List>
-                            <ListItem primaryText={<Title/>}
-                                      secondaryText={<Info/>}
-                                      leftAvatar={<Avatar style={{borderRadius: 5}}
-                                                          backgroundColor="#ddd"/>}/>
-                            <Divider inset={true}/>
-                        </List>
-                }
+                <Paper zDepth={2}>
+                    {
+                        isFetch ? <div style={{textAlign: 'center'}}><CircularProgress size={60}/></div> :
+                            <List style={{height: '100%'}}>
+                                {data.map((item, i) => (
+                                    <div key={i}>
+                                        <ListItem primaryText={<Title title={item}/>}
+                                                  secondaryText={<Info info={item}/>}
+                                                  leftAvatar={<Avatar style={styles.avatar}
+                                                                      src={item.author.avatar_url}/>}/>
+                                        <Divider inset={true}/>
+                                    </div>
+                                ))}
+
+                            </List>
+
+                    }
+                </Paper>
             </div>
         );
     }
@@ -50,14 +75,18 @@ class ArticleList extends Component {
 
 const Title = (props) => (
     <div style={styles.primaryText}>
-        <span>FFFFFfFF</span>
+        {props.title.top && <span style={{color: 'red', paddingRight: 10}}>顶</span>}
+        {props.title.good && <span style={{color: 'red', paddingRight: 10}}>精</span>}
+        <span style={styles.title}>{props.title.title}</span>
     </div>
 );
 
-const Info = () => (
+const Info = (props) => (
     <div style={styles.secondaryText}>
-        <span>100/520</span>
-        <span style={{paddingLeft: 15}}>分享</span>
+        <span style={{paddingRight: 10}}>
+            {props.info.reply_count}/{props.info.visit_count}
+        </span>
+        <span>{tab[props.info.tab]}</span>
     </div>
 );
 

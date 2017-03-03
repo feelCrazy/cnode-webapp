@@ -10,6 +10,8 @@ import DrawerLeft from '../components/DrawerLeft';
 import Paper from 'material-ui/Paper';
 import ArticleList from '../components/ArticleList';
 
+let List = '';
+
 const styles = {
     main: {
         height: 500,
@@ -49,7 +51,14 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        this.props.userAction.getArticle('good');
+        this.props.userAction.getArticle('all');
+    }
+
+    componentWillReceiveProps(newProps) {
+        const {articleState} = newProps;
+        if (articleState.topics) {
+            List = <ArticleList data={articleState.topics} isFetch={articleState.isFetch}/>
+        }
     }
 
     toggleDrawer = () => {
@@ -65,19 +74,17 @@ class HomePage extends Component {
 
 
     render() {
-        const {userState, articleState} = this.props;
+        const {userState} = this.props;
         return (
             <div>
                 <Header click={this.handleOpen}
                         title="Home"
                         isLogin={userState.isLogin}/>
                 <div style={styles.main}>
-                    <Paper zDepth={2}
-                           style={styles.left}>
+                    <div style={styles.left}>
+                        {List}
+                    </div>
 
-                        <ArticleList data={articleState.topics} isFetch={articleState.isFetch}/>
-
-                    </Paper>
                     <Paper zDepth={2}
                            style={styles.right}/>
 

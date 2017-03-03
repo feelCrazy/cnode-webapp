@@ -24,7 +24,7 @@ export const articleReduce = (state = {isFetch: false, page: 0, topics: []}, act
         case RECEIVE_TOPICS:
             if (state.page < action.page) {
                 let topics = state.topics;
-                action.topics = topics.concat(action.topics)
+                action.topics = topics.concat(action.topics.data)
             }
             return {...state, isFetch: false, page: action.page, topics: action.topics, limit: action.limit};
         default:
