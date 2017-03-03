@@ -41,7 +41,8 @@ class DrawerLeft extends Component {
                                   leftIcon={<ActionHome/>}>
                         </ListItem>
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Hot"
-                                  leftIcon={<Hot/>} containerElement={<Link to="hot"/>}/>
+                                  leftIcon={<Hot/>}
+                                  containerElement={<Link to="hot"/>}/>
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Share"
                                   leftIcon={<Share/>}/>
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Job" leftIcon={<Job/>}/>

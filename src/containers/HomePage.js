@@ -56,9 +56,7 @@ class HomePage extends Component {
 
     componentWillReceiveProps(newProps) {
         const {articleState} = newProps;
-        if (articleState.topics) {
-            List = <ArticleList data={articleState.topics} isFetch={articleState.isFetch}/>
-        }
+        List = <ArticleList data={articleState.topics} isFetch={articleState.isFetch}/>;
     }
 
     toggleDrawer = () => {

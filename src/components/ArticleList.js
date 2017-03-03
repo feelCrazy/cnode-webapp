@@ -45,6 +45,7 @@ class ArticleList extends Component {
 
     render() {
         const {isFetch, data} = this.props;
+        console.log(data);
         return (
             <div>
                 <Paper zDepth={2}>

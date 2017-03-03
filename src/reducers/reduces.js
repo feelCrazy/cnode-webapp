@@ -22,11 +22,17 @@ export const articleReduce = (state = {isFetch: false, page: 0, topics: []}, act
         case REQUEST_TOPICS:
             return {...state, isFetch: true, tab: action.name};
         case RECEIVE_TOPICS:
-            if (state.page < action.page) {
-                let topics = state.topics;
-                action.topics = topics.concat(action.topics.data)
-            }
-            return {...state, isFetch: false, page: action.page, topics: action.topics, limit: action.limit};
+            /* if (state.page < action.page) {
+             let topics = state.topics;
+             action.topics = topics.concat(action.topics.data)
+             }*/
+            return {
+                ...state,
+                isFetch: false,
+                page: action.page,
+                topics: action.topics.data,
+                limit: action.limit
+            };
         default:
             return state;
     }
