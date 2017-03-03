@@ -7,12 +7,14 @@ import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
+import {Link} from 'react-router';
 
 const styles = {
     primaryText: {
         fontWeight: "bold",
         paddingBottom: 15,
         paddingLeft: 10,
+        verticalAlign: "middle"
     },
     secondaryText: {
         color: "#9d9d9d",
@@ -30,7 +32,7 @@ const styles = {
         width: "80%",
         overflow: "hidden",
         textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
     }
 
 };
@@ -53,13 +55,13 @@ class ArticleList extends Component {
                         isFetch ? <div style={{textAlign: 'center'}}><CircularProgress size={60}/></div> :
                             <List style={{height: '100%'}}>
                                 {data.map((item, i) => (
-                                    <div key={i}>
+                                    <Link key={i} to={'/hot'} style={{textDecorationLine: 'none'}}>
                                         <ListItem primaryText={<Title title={item}/>}
                                                   secondaryText={<Info info={item}/>}
                                                   leftAvatar={<Avatar style={styles.avatar}
                                                                       src={item.author.avatar_url}/>}/>
                                         <Divider inset={true}/>
-                                    </div>
+                                    </Link>
                                 ))}
                             </List>
                     }
