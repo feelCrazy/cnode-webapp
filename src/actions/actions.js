@@ -1,7 +1,15 @@
 /**
  * Created by ming on 2017/2/24
  */
-import {LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, RECEIVE_TOPICS, REQUEST_TOPICS} from '../actions/types';
+import {
+    LOGIN_START,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    RECEIVE_TOPICS,
+    REQUEST_TOPICS,
+    START_ADD_ARTICLE,
+    ADD_ARTICLE
+} from '../actions/types';
 import axios from 'axios';
 
 export const fetchStart = (res) => ({
@@ -32,6 +40,17 @@ export const receiveTopics = (name, topics, page, limit) => ({
     limit
 });
 
+export const startAddArticle = (name) => ({
+    type: START_ADD_ARTICLE,
+    name
+});
+
+export const addArticle = (pram) => ({
+    type: ADD_ARTICLE,
+    pram
+});
+
+// 检查token
 export const userLogin = (key) => {
     return dispatch => {
         dispatch(fetchStart());
@@ -48,6 +67,7 @@ export const userLogin = (key) => {
     }
 };
 
+// 获取帖子
 export const getArticle = (name, page = 1, limit = 20,) => {
     return dispatch => {
         dispatch(requestTopics(name));
@@ -61,3 +81,17 @@ export const getArticle = (name, page = 1, limit = 20,) => {
             })
     }
 };
+
+// 添加帖子
+export const userAddArticle = (pram) => {
+    return dispatch => {
+        dispatch(startAddArticle());
+        axios.post('/topics/update', pram)
+            .then(res => {
+                console.log(res);
+                dispatch(addArticle(res.data))
+            })
+            .catch(err => console.log(err))
+    }
+};
+
