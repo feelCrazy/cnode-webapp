@@ -4,6 +4,9 @@
 
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {getArticle} from '../actions/actions';
 import Header from '../components/Header';
 
 class HotPage extends Component {
@@ -12,8 +15,12 @@ class HotPage extends Component {
         this.state = {};
     }
 
+    componentDidMount() {
+        this.props.userAction.getArticle('good');
+    }
+
     handleClickBack = () => {
-        browserHistory.go(-1)
+        browserHistory.goBack()
     };
 
     render() {
@@ -30,4 +37,17 @@ class HotPage extends Component {
 
 HotPage.propTypes = {};
 HotPage.defaultProps = {};
-export default HotPage;
+
+function mapStateToProps(state) {
+    return {
+        userState: state.userReduce,
+        articleState: state.articleReduce,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        userAction: bindActionCreators({getArticle}, dispatch)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HotPage);

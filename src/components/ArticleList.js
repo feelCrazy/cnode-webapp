@@ -47,13 +47,12 @@ class ArticleList extends Component {
 
     render() {
         const {isFetch, data} = this.props;
-        console.log(data);
         return (
             <div>
                 <Paper zDepth={2}>
                     {
                         isFetch ? <div style={{textAlign: 'center'}}><CircularProgress size={60}/></div> :
-                            <List style={{height: '100%'}}>
+                            <List>
                                 {data.map((item, i) => (
                                     <Link key={i} to={'/hot'} style={{textDecorationLine: 'none'}}>
                                         <ListItem primaryText={<Title title={item}/>}

@@ -1,7 +1,15 @@
 /**
  * Created by ming on 2017/2/24
  */
-import {LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, REQUEST_TOPICS, RECEIVE_TOPICS} from '../actions/types';
+import {
+    LOGIN_START,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    REQUEST_TOPICS,
+    RECEIVE_TOPICS,
+    START_ADD_ARTICLE,
+    ADD_ARTICLE
+} from '../actions/types';
 const initialState = {isLogin: false};
 
 export const userReduce = (state = initialState, action) => {
@@ -33,6 +41,17 @@ export const articleReduce = (state = {isFetch: false, page: 0, topics: []}, act
                 topics: action.topics.data,
                 limit: action.limit
             };
+        default:
+            return state;
+    }
+};
+
+export const addArticleReduce = (state = {isAdd: false}, action) => {
+    switch (action.type) {
+        case START_ADD_ARTICLE:
+            return {...state, isAdd: true};
+        case ADD_ARTICLE:
+            return {...state, isAdd: false, res: action.pram};
         default:
             return state;
     }
