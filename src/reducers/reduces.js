@@ -8,7 +8,9 @@ import {
     REQUEST_TOPICS,
     RECEIVE_TOPICS,
     START_ADD_ARTICLE,
-    ADD_ARTICLE
+    ADD_ARTICLE,
+    REQUEST_DETAILS,
+    RECEIVE_DETAILS
 } from '../actions/types';
 const initialState = {isLogin: false};
 
@@ -41,6 +43,16 @@ export const articleReduce = (state = {isFetch: false, page: 0, topics: []}, act
                 topics: action.topics.data,
                 limit: action.limit
             };
+        default:
+            return state;
+    }
+};
+export const articleDetailsReduce = (state = {isLoading: false}, action) => {
+    switch (action.type) {
+        case REQUEST_DETAILS:
+            return {...state, isLoading: true};
+        case RECEIVE_DETAILS:
+            return {...state, isLoading: false, res: action.res};
         default:
             return state;
     }

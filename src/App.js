@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import './assets/App.css';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 

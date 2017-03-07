@@ -51,10 +51,13 @@ class ArticleList extends Component {
             <div>
                 <Paper zDepth={2}>
                     {
-                        isFetch ? <div style={{textAlign: 'center'}}><CircularProgress size={60}/></div> :
+                        isFetch ?
+                            <div style={{textAlign: 'center', paddingTop: 50}}><CircularProgress size={50}/>
+                            </div> :
                             <List>
                                 {data.map((item, i) => (
-                                    <Link key={i} to={'/hot'} style={{textDecorationLine: 'none'}}>
+                                    <Link key={i} to={'/Article/' + item.id}
+                                          style={{textDecorationLine: 'none'}}>
                                         <ListItem primaryText={<Title title={item}/>}
                                                   secondaryText={<Info info={item}/>}
                                                   leftAvatar={<Avatar style={styles.avatar}

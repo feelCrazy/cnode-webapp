@@ -8,9 +8,13 @@ import {
     RECEIVE_TOPICS,
     REQUEST_TOPICS,
     START_ADD_ARTICLE,
-    ADD_ARTICLE
+    ADD_ARTICLE,
+    REQUEST_DETAILS,
+    RECEIVE_DETAILS
 } from '../actions/types';
 import axios from 'axios';
+// accesstoken: '199183d1-b722-4cc4-bdaa-5443b964f84c',
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export const fetchStart = (res) => ({
     type: LOGIN_START,
@@ -50,6 +54,16 @@ export const addArticle = (pram) => ({
     pram
 });
 
+export const requestDetails = (id) => ({
+    type: REQUEST_DETAILS,
+    id
+});
+
+export const receiveDetails = (res) => ({
+    type: RECEIVE_DETAILS,
+    res
+});
+
 // 检查token
 export const userLogin = (key) => {
     return dispatch => {
@@ -81,6 +95,22 @@ export const getArticle = (name, page = 1, limit = 20,) => {
             })
     }
 };
+
+// 帖子详情
+export const getDetails = (id) => {
+    return dispatch => {
+        dispatch(requestDetails(id));
+        axios.get('/topic/' + id)
+            .then(res => {
+                console.log(res);
+                dispatch(receiveDetails(res.data));
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+};
+
 
 // 添加帖子
 export const userAddArticle = (pram) => {
