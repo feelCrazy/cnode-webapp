@@ -16,18 +16,47 @@ const style = {
         justifyContent: 'space-between'
     },
     mainLeft: {
-        width: '70%'
+        width: '70%',
+        borderRadius: 3
     },
     mainRight: {
         width: '25%',
+        borderRadius: 3
     },
     title: {
-
-        padding: 10,
+        paddingLeft: 15,
+        borderBottom: 1,
+        borderBottomColor: "#d6d6d6",
+        borderBottomStyle: 'solid',
+    },
+    titleName: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingTop: 20
+    },
+    secondTitle: {
+        paddingTop: 10,
+        paddingBottom: 45,
+        color: "#8d8d8d",
+        fontSize: 14,
+        paddingLeft: 20
+    },
+    li: {
+        float: "left",
+        marginLeft: 25
+    },
+    info: {
+        backgroundColor: "#e9e9e9",
+        padding: 10
+    },
+    userAvatar: {
+        borderRadius: 5,
+        marginTop: 10,
+        marginLeft: 10
     }
-
 };
 
+const tab = {all: '全部', share: '分享', job: '招聘', good: '精华', ask: '问答'};
 class Article extends Component {
     constructor(props) {
         super(props);
@@ -40,13 +69,28 @@ class Article extends Component {
             <div>
                 <div style={style.container}>
                     <Paper zDepth={2} style={style.mainLeft}>
+                        <div style={style.title}>
+                            <div style={style.titleName}>{data.data.title}</div>
+                            <div style={style.secondTitle}>
+                                <ul>
+                                    <li style={{float: "left"}}><span>发布于：11xX</span></li>
+                                    <li style={style.li}>
+                                        <span>作者：{data.data.author.loginname}</span></li>
+                                    <li style={style.li}>
+                                        <span>来自：{tab[data.data.tab]}</span></li>
+                                </ul>
+
+                            </div><button>收藏</button>
+                        </div>
                         <div className='main'
                              dangerouslySetInnerHTML={{__html: data.data.content}}></div>
                     </Paper>
                     <Paper style={style.mainRight}>
                         <div>
-                            <p style={style.title}>作者</p>
-                            <Avatar/>
+                            <div style={style.info}>作者</div>
+                            <Avatar src={data.data.author.avatar_url} size={50}
+                                    style={style.userAvatar}/>
+                            <span >{data.data.author.loginname}</span>
                         </div>
                     </Paper>
                 </div>
