@@ -10,10 +10,13 @@ import {
     START_ADD_ARTICLE,
     ADD_ARTICLE,
     REQUEST_DETAILS,
-    RECEIVE_DETAILS
+    RECEIVE_DETAILS,
+    RECEIVE_USERINFO,
+    REQUEST_USERINFO,
 } from '../actions/types';
 const initialState = {isLogin: false};
 
+// 用户登录
 export const userReduce = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_START:
@@ -27,6 +30,7 @@ export const userReduce = (state = initialState, action) => {
     }
 };
 
+// 文章
 export const articleReduce = (state = {isFetch: false, page: 0, topics: []}, action) => {
     switch (action.type) {
         case REQUEST_TOPICS:
@@ -47,6 +51,8 @@ export const articleReduce = (state = {isFetch: false, page: 0, topics: []}, act
             return state;
     }
 };
+
+//文章详情
 export const articleDetailsReduce = (state = {isLoading: false}, action) => {
     switch (action.type) {
         case REQUEST_DETAILS:
@@ -58,12 +64,25 @@ export const articleDetailsReduce = (state = {isLoading: false}, action) => {
     }
 };
 
+// 添加文章
 export const addArticleReduce = (state = {isAdd: false}, action) => {
     switch (action.type) {
         case START_ADD_ARTICLE:
             return {...state, isAdd: true};
         case ADD_ARTICLE:
             return {...state, isAdd: false, res: action.pram};
+        default:
+            return state;
+    }
+};
+
+// 作者详情
+export const authorReduce = (state = {isLoading: false}, action) => {
+    switch (action.type) {
+        case REQUEST_USERINFO:
+            return {...state, isLoading: true};
+        case RECEIVE_USERINFO:
+            return {...state, isLoading: false, res: action.res};
         default:
             return state;
     }

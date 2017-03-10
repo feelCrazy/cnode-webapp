@@ -10,7 +10,9 @@ import {
     START_ADD_ARTICLE,
     ADD_ARTICLE,
     REQUEST_DETAILS,
-    RECEIVE_DETAILS
+    RECEIVE_DETAILS,
+    RECEIVE_USERINFO,
+    REQUEST_USERINFO,
 } from '../actions/types';
 import axios from 'axios';
 // accesstoken: '199183d1-b722-4cc4-bdaa-5443b964f84c',
@@ -64,6 +66,16 @@ export const receiveDetails = (res) => ({
     res
 });
 
+export const requestUserInfo = (name) => ({
+    type: REQUEST_USERINFO,
+    name
+});
+
+export const receiveUserInfo = (res) => ({
+    type: RECEIVE_USERINFO,
+    res
+});
+
 // 检查token
 export const userLogin = (key) => {
     return dispatch => {
@@ -111,6 +123,22 @@ export const getDetails = (id) => {
     }
 };
 
+// 获取用户信息
+export const getUserInfo = (name) => {
+    return dispatch => {
+        dispatch(requestUserInfo(name));
+        axios.get('/user/' + name)
+            .then(res => {
+                console.log(res);
+                dispatch(receiveUserInfo(res.data))
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
+
+};
 
 // 添加帖子
 export const userAddArticle = (pram) => {

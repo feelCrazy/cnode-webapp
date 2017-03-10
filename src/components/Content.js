@@ -8,19 +8,19 @@ import '../assets/App.css'
 
 const style = {
     container: {
-        paddingLeft: 25,
-        paddingRight: 25,
+        // paddingLeft: 25,
+        // paddingRight: 25,
         paddingTop: 15,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     mainLeft: {
-        width: '70%',
+        width: '60%',
         borderRadius: 3
     },
     mainRight: {
-        width: '25%',
+        width: '20%',
         borderRadius: 3
     },
     title: {
