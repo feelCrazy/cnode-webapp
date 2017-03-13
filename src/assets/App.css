@@ -1,10 +1,8 @@
 .main {
   padding: 0 20px; }
-
-.main p {
-  text-indent: 2em; }
-
-.main img {
-  display: block;
-  margin: 20px auto;
-  width: 30%; }
+  .main p {
+    text-indent: 2em; }
+  .main img {
+    display: block;
+    margin: 20px auto;
+    width: 30%; }

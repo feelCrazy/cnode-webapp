@@ -52,7 +52,10 @@ const style = {
     userAvatar: {
         borderRadius: 5,
         marginTop: 10,
-        marginLeft: 10
+        marginLeft: 10,
+        marginRight: 10,
+        display: "inline-block",
+        verticalAlign: "middle"
     }
 };
 
@@ -80,10 +83,10 @@ class Article extends Component {
                                         <span>来自：{tab[data.data.tab]}</span></li>
                                 </ul>
 
-                            </div><button>收藏</button>
+                            </div>
+                            <button>收藏</button>
                         </div>
-                        <div className='main'
-                             dangerouslySetInnerHTML={{__html: data.data.content}}></div>
+                        <div className='main' dangerouslySetInnerHTML={{__html: data.data.content}}/>
                     </Paper>
                     <Paper style={style.mainRight}>
                         <div>

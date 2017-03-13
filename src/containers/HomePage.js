@@ -14,20 +14,21 @@ let List = '';
 
 const styles = {
     main: {
-        height: 500,
         paddingTop: 15,
-        paddingLeft: 25,
-        paddingRight: 25,
         display: "flex",
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        margin: '0 auto',
+        maxWidth: 1400,
+        minWidth: 960,
+        width: "90%"
 
     },
     left: {
-        width: "70%",
+        width: "78%",
     },
     right: {
-        width: "25%",
+        width: "20%",
         height: 300
     },
     primaryText: {
@@ -36,10 +37,16 @@ const styles = {
         paddingLeft: 20,
     },
     secondaryText: {
-        color: "#9d9d9d",
+        color: "#9b9b9b",
         paddingLeft: 20,
         fontWeight: 'bold',
         fontSize: 14
+    },
+    title: {
+        backgroundColor: '#f6f6f6',
+        paddingLeft: 10,
+        paddingTop: 10,
+        paddingBottom: 10
     }
 
 };
@@ -73,6 +80,8 @@ class HomePage extends Component {
 
     render() {
         const {userState} = this.props;
+        const info = JSON.parse(window.localStorage.getItem("userAcc"));
+        console.log(info);
         return (
             <div>
                 <Header click={this.handleOpen}
@@ -84,7 +93,15 @@ class HomePage extends Component {
                     </div>
 
                     <Paper zDepth={2}
-                           style={styles.right}/>
+                           style={styles.right}>
+                        <div style={styles.title}>个人信息</div>
+                        <div style={{paddingTop: 10, paddingBottom: 10, paddingLeft: 10, paddingRight: 10}}>
+                            <a style={{display: "inline-block", verticalAlign: "middle"}}>
+                                <img src={info.avatarURL} style={{width: 48, height: 48}} alt="img"/>
+                            </a>
+                            <span>{info.loginName}</span>
+                        </div>
+                    </Paper>
                 </div>
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}
