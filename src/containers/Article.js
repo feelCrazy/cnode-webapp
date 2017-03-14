@@ -49,6 +49,7 @@ class Article extends Component {
 
     render() {
         const {detailsState} = this.props;
+
         return (
             <div>
                 <Header title="文章" click={this.handleClick} goBack={true}/>

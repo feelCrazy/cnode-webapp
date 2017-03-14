@@ -8,6 +8,8 @@ import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
 const styles = {
     primaryText: {
@@ -42,8 +44,18 @@ const tab = {all: '全部', share: '分享', job: '招聘', good: '精华', ask:
 class ArticleList extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            current: 1
+        };
     }
+
+    onChange = (page) => {
+        console.log(page);
+        this.setState({
+            current: page,
+        });
+
+    };
 
     render() {
         const {isFetch, data} = this.props;
@@ -65,6 +77,13 @@ class ArticleList extends Component {
                                         <Divider inset={true}/>
                                     </Link>
                                 ))}
+                                <Pagination
+                                    style={{marginTop: 10, marginLeft: 10}}
+                                    onChange={this.onChange}
+                                    current={this.state.current}
+                                    total={800}
+                                    showLessItems
+                                />
                             </List>
                     }
                 </Paper>
@@ -80,6 +99,9 @@ const Title = (props) => (
         <span style={styles.title}>{props.title.title}</span>
     </div>
 );
+Title.propTypes = {
+    title: PropTypes.object
+};
 
 const Info = (props) => (
     <div style={styles.secondaryText}>
@@ -89,6 +111,9 @@ const Info = (props) => (
         <span>{tab[props.info.tab]}</span>
     </div>
 );
+Info.propTypes = {
+    info: PropTypes.object
+};
 
 ArticleList.propTypes = {
     data: PropTypes.array.isRequired,

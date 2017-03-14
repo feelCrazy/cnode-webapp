@@ -21,7 +21,8 @@ const styles = {
         margin: '0 auto',
         maxWidth: 1400,
         minWidth: 960,
-        width: "90%"
+        width: "90%",
+        paddingBottom:100
 
     },
     left: {
