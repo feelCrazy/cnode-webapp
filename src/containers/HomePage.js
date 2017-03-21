@@ -100,7 +100,7 @@ class HomePage extends Component {
                             <a style={{display: "inline-block", verticalAlign: "middle"}}>
                                 {/*<img src={info.avatarURL} style={{width: 48, height: 48}} alt="img"/>*/}
                             </a>
-                            <span>{info.loginName}</span>
+                            {/*<span>{info.loginName}</span>*/}
                         </div>
                     </Paper>
                 </div>
