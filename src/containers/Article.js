@@ -18,12 +18,7 @@ const style = {
     progress: {
         marginTop: 50
     },
-    container: {
-        margin: '0 auto',
-        maxWidth: 1400,
-        minWidth: 960,
-        width: "90%"
-    }
+
 };
 class Article extends Component {
     constructor(props) {
@@ -53,7 +48,7 @@ class Article extends Component {
         return (
             <div>
                 <Header title="文章" click={this.handleClick} goBack={true}/>
-                <div style={style.container}>
+                <div>
                     { detailsState.isLoading ?
                         <div style={style.main}><CircularProgress style={style.progress} size={50}/>
                         </div> : content}

@@ -1,8 +1,14 @@
 .main {
-  padding: 0 20px; }
-  .main p {
-    text-indent: 2em; }
+  padding: 20px; }
+
+.main p {
+  text-indent: 2em; }
+
+.main img {
+  display: block;
+  margin: 20px auto;
+  width: 600px; }
+
+@media (max-width: 750px) {
   .main img {
-    display: block;
-    margin: 20px auto;
-    width: 30%; }
+    width: 80%; } }

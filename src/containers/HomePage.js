@@ -14,23 +14,8 @@ let List = '';
 
 const styles = {
     main: {
-        paddingTop: 15,
-        display: "flex",
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        margin: '0 auto',
-        maxWidth: 1400,
-        minWidth: 960,
-        width: "90%",
-        paddingBottom:100
+        // paddingTop: 15,
 
-    },
-    left: {
-        width: "78%",
-    },
-    right: {
-        width: "20%",
-        height: 300
     },
     primaryText: {
         fontWeight: "bold",
@@ -49,7 +34,6 @@ const styles = {
         paddingTop: 10,
         paddingBottom: 10
     }
-
 };
 
 class HomePage extends Component {
@@ -87,22 +71,23 @@ class HomePage extends Component {
             <div>
                 <Header click={this.handleOpen}
                         title="Home"
-                        isLogin={userState.isLogin}/>
+                        isLogin={userState.isLogin}
+                />
                 <div style={styles.main}>
-                    <div style={styles.left}>
+                    <div >
                         {List}
                     </div>
 
-                    <Paper zDepth={2}
+                   {/* <Paper zDepth={2}
                            style={styles.right}>
                         <div style={styles.title}>个人信息</div>
                         <div style={{paddingTop: 10, paddingBottom: 10, paddingLeft: 10, paddingRight: 10}}>
                             <a style={{display: "inline-block", verticalAlign: "middle"}}>
-                                {/*<img src={info.avatarURL} style={{width: 48, height: 48}} alt="img"/>*/}
+                                <img src={info.avatarURL} style={{width: 48, height: 48}} alt="img"/>
                             </a>
-                            {/*<span>{info.loginName}</span>*/}
+                            <span>{info.loginName}</span>
                         </div>
-                    </Paper>
+                    </Paper>*/}
                 </div>
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}

@@ -7,11 +7,14 @@ import Drawer from 'material-ui/Drawer';
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import ActionHome from 'material-ui/svg-icons/action/home';
-import ContentMail from 'material-ui/svg-icons/content/mail';
 import Hot from 'material-ui/svg-icons/social/whatshot';
 import Divider  from 'material-ui/Divider';
 import Share from 'material-ui/svg-icons/social/share';
 import Job from 'material-ui/svg-icons/places/business-center';
+import Comment from 'material-ui/svg-icons/communication/comment';
+import Message from 'material-ui/svg-icons/social/notifications';
+import About from 'material-ui/svg-icons/action/info';
+
 
 const styles = {
     avatar: {
@@ -37,20 +40,24 @@ class DrawerLeft extends Component {
 
                     <List>
                         <ListItem style={{borderWidth: 1, borderColor: '#eee',}}
-                                  onTouchTap={this.props.toggleDrawer} primaryText="Home"
+                                  onTouchTap={this.props.toggleDrawer} primaryText="全部"
                                   leftIcon={<ActionHome/>}>
                         </ListItem>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Hot"
+                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="精华"
                                   leftIcon={<Hot/>}
                                   containerElement={<Link to="hot"/>}/>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Share"
+                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="分享"
                                   leftIcon={<Share/>}/>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Job" leftIcon={<Job/>}/>
+                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="问答" leftIcon={<Job/>}/>
+                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="招聘"
+                                  leftIcon={<Comment/>}/>
                         <Divider/>
-                    </List>
-                    <List>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="Message"
-                                  leftIcon={<ContentMail/>}/>
+                        {/*</List>
+                         <List>*/}
+                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="消息"
+                                  leftIcon={<Message/>}/>
+                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="关于"
+                                  leftIcon={<About/>}/>
                     </List>
 
                 </Drawer>

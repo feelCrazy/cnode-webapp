@@ -77,13 +77,13 @@ class ArticleList extends Component {
                                         <Divider inset={true}/>
                                     </Link>
                                 ))}
-                                <Pagination
+                              {/*  <Pagination
                                     style={{marginTop: 10, marginLeft: 10}}
                                     onChange={this.onChange}
                                     current={this.state.current}
                                     total={800}
                                     showLessItems
-                                />
+                                />*/}
                             </List>
                     }
                 </Paper>

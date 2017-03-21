@@ -15,6 +15,9 @@ import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 const styles = {
     loginBtn: {
         color: '#fff',
+    },
+    title: {
+        fontSize: 18
     }
 };
 
@@ -35,7 +38,7 @@ class Header extends Component {
 
     render() {
         const userAcc = window.localStorage.getItem('userAcc');
-        const {title, goBack} =this.props;
+        const {title, goBack} = this.props;
         return (
             <div>
                 <AppBar title={title}
