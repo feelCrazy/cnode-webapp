@@ -98,7 +98,7 @@ class HomePage extends Component {
                         <div style={styles.title}>个人信息</div>
                         <div style={{paddingTop: 10, paddingBottom: 10, paddingLeft: 10, paddingRight: 10}}>
                             <a style={{display: "inline-block", verticalAlign: "middle"}}>
-                                <img src={info.avatarURL} style={{width: 48, height: 48}} alt="img"/>
+                                {/*<img src={info.avatarURL} style={{width: 48, height: 48}} alt="img"/>*/}
                             </a>
                             <span>{info.loginName}</span>
                         </div>
