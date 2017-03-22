@@ -5,12 +5,14 @@ import React, {Component} from 'react';
 import  {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getDetails} from '../actions/actions';
+import {getDetails, userClcikUps} from '../actions/actions';
 import Header from '../components/Header';
 import Content from '../components/Content';
 import CircularProgress from 'material-ui/CircularProgress';
+import Reply from '../components/Reply'
 
 let content;
+let reply;
 const style = {
     main: {
         textAlign: 'center'
@@ -31,9 +33,10 @@ class Article extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        const {detailsState} = newProps;
+        const {detailsState, userAction} = newProps;
         if (detailsState.res) {
-            content = <Content data={detailsState.res}/>
+            content = <Content data={detailsState.res}/>;
+            reply = <Reply reply={detailsState.res.data} action={userAction.userClcikUps}/>
         }
     }
 
@@ -44,7 +47,7 @@ class Article extends Component {
 
     render() {
         const {detailsState} = this.props;
-
+        // console.log(this.props.userAction);
         return (
             <div>
                 <Header title="文章" click={this.handleClick} goBack={true}/>
@@ -53,6 +56,8 @@ class Article extends Component {
                         <div style={style.main}><CircularProgress style={style.progress} size={50}/>
                         </div> : content}
                 </div>
+                {reply}
+
             </div>
         );
     }
@@ -73,7 +78,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        userAction: bindActionCreators({getDetails}, dispatch)
+        userAction: bindActionCreators({getDetails, userClcikUps}, dispatch)
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Article);

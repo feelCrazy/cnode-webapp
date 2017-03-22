@@ -13,6 +13,7 @@ import {
     RECEIVE_DETAILS,
     RECEIVE_USERINFO,
     REQUEST_USERINFO,
+    RECEIVE_USERUPS
 } from '../actions/types';
 import axios from 'axios';
 // accesstoken: '199183d1-b722-4cc4-bdaa-5443b964f84c',
@@ -74,6 +75,13 @@ export const requestUserInfo = (name) => ({
 export const receiveUserInfo = (res) => ({
     type: RECEIVE_USERINFO,
     res
+});
+
+export const receiveUps = (id, index,action) => ({
+    type: RECEIVE_USERUPS,
+    id,
+    index,
+    action
 });
 
 // 检查token
@@ -150,6 +158,18 @@ export const userAddArticle = (pram) => {
                 dispatch(addArticle(res.data))
             })
             .catch(err => console.log(err))
+    }
+};
+
+// 点赞
+export const userClcikUps = (id, accesstoken, index) => {
+    return dispatch => {
+        axios.post('/reply/' + id + '/ups', {
+            accesstoken: accesstoken
+        }).then(res => {
+            console.log(res);
+            dispatch(receiveUps(id, index,res.data))
+        })
     }
 };
 

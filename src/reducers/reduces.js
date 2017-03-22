@@ -13,6 +13,7 @@ import {
     RECEIVE_DETAILS,
     RECEIVE_USERINFO,
     REQUEST_USERINFO,
+    RECEIVE_USERUPS
 } from '../actions/types';
 const initialState = {isLogin: false};
 
@@ -59,6 +60,11 @@ export const articleDetailsReduce = (state = {isLoading: false}, action) => {
             return {...state, isLoading: true};
         case RECEIVE_DETAILS:
             return {...state, isLoading: false, res: action.res};
+        case RECEIVE_USERUPS:
+            return {
+                ...state,
+                SupportInfo: {replyId: action.id, index: action.index, success: action.action}
+            };
         default:
             return state;
     }
@@ -87,3 +93,5 @@ export const authorReduce = (state = {isLoading: false}, action) => {
             return state;
     }
 };
+
+// 点赞

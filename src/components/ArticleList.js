@@ -8,7 +8,7 @@ import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
-import InfiniteLoader from 'react-infinite-loader'
+import InfiniteLoader from 'react-infinite-loader';
 
 let page = 1;
 const styles = {
@@ -117,7 +117,6 @@ class ArticleList extends Component {
                             <div style={{textAlign: 'center', paddingTop: 50}}><CircularProgress size={50}/>
                             </div> :
                             <List style={{
-                                paddingBottom: '2rem',
                                 position: 'relative'
                             }}>
                                 {data.map((item, i) => (
@@ -134,8 +133,8 @@ class ArticleList extends Component {
                                     visitStyle={{
                                         position: 'absolute',
                                         width: '100%',
-                                        bottom: '10rem',
-                                        height: '10rem'
+                                        bottom: 10,
+                                        height: 10
                                     }}
                                     onVisited={this.loadMore}/>
 
