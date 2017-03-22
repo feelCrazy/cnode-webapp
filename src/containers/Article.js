@@ -48,7 +48,7 @@ class Article extends Component {
         return (
             <div>
                 <Header title="文章" click={this.handleClick} goBack={true}/>
-                <div>
+                <div style={{paddingTop: 55}}>
                     { detailsState.isLoading ?
                         <div style={style.main}><CircularProgress style={style.progress} size={50}/>
                         </div> : content}

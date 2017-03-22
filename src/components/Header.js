@@ -17,7 +17,16 @@ const styles = {
         color: '#fff',
     },
     title: {
-        fontSize: 18
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    header: {
+        position: "fixed",
+        zIndex: 10,
+        top: 0,
+        left: 0,
+        width: "100%",
+        boxShadow: " 0 0 4px rgba(0,0,0,.25)"
     }
 };
 
@@ -40,7 +49,7 @@ class Header extends Component {
         const userAcc = window.localStorage.getItem('userAcc');
         const {title, goBack} = this.props;
         return (
-            <div>
+            <div style={styles.header}>
                 <AppBar title={title}
                         iconElementLeft={goBack ?
                             <IconButton><NavigationBack/></IconButton> :
@@ -48,9 +57,8 @@ class Header extends Component {
                         onLeftIconButtonTouchTap={this.handleClick}
                         titleStyle={styles.title}
                         iconElementRight={userAcc !== null ?
-                            <Logged logout={this.logout}/> : <FlatButton label="LOGIN" onClick={this.login}/>}
-                >
-                </AppBar>
+                            <Logged logout={this.logout}/> :
+                            <FlatButton label="LOGIN" onClick={this.login}/>}/>
             </div>
         );
     }

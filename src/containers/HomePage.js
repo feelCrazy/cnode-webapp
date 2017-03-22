@@ -7,15 +7,14 @@ import {bindActionCreators} from 'redux';
 import {userLogin, getArticle} from '../actions/actions';
 import Header from '../components/Header';
 import DrawerLeft from '../components/DrawerLeft';
-import Paper from 'material-ui/Paper';
 import ArticleList from '../components/ArticleList';
+// import CircularProgress from 'material-ui/CircularProgress';
 
 let List = '';
 
 const styles = {
     main: {
-        // paddingTop: 15,
-
+        paddingTop: 55,
     },
     primaryText: {
         fontWeight: "bold",
@@ -48,8 +47,13 @@ class HomePage extends Component {
 
     componentWillReceiveProps(newProps) {
         const {articleState} = newProps;
-        List = <ArticleList data={articleState.topics} isFetch={articleState.isFetch}/>;
+        List = <ArticleList data={articleState.topics} loadMore={this.loadMore}
+                            isFetch={articleState.isFetch} page={articleState.page}/>;
     }
+
+    loadMore = (page) => {
+        this.props.userAction.getArticle('all', page);
+    };
 
     toggleDrawer = () => {
         this.setState({
@@ -65,29 +69,19 @@ class HomePage extends Component {
 
     render() {
         const {userState} = this.props;
-        const info = JSON.parse(window.localStorage.getItem("userAcc"));
-        console.log(info);
+        // const info = JSON.parse(window.localStorage.getItem("userAcc"));
         return (
             <div>
                 <Header click={this.handleOpen}
                         title="Home"
                         isLogin={userState.isLogin}
+
                 />
                 <div style={styles.main}>
                     <div >
                         {List}
                     </div>
 
-                   {/* <Paper zDepth={2}
-                           style={styles.right}>
-                        <div style={styles.title}>个人信息</div>
-                        <div style={{paddingTop: 10, paddingBottom: 10, paddingLeft: 10, paddingRight: 10}}>
-                            <a style={{display: "inline-block", verticalAlign: "middle"}}>
-                                <img src={info.avatarURL} style={{width: 48, height: 48}} alt="img"/>
-                            </a>
-                            <span>{info.loginName}</span>
-                        </div>
-                    </Paper>*/}
                 </div>
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}

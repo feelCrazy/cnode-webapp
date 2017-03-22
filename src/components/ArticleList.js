@@ -8,15 +8,15 @@ import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
-import Pagination from 'rc-pagination';
-import 'rc-pagination/assets/index.css';
+import InfiniteLoader from 'react-infinite-loader'
 
+let page = 1;
 const styles = {
     primaryText: {
         fontWeight: "bold",
         paddingBottom: 15,
         paddingLeft: 10,
-        verticalAlign: "middle"
+        verticalAlign: "middle",
     },
     secondaryText: {
         color: "#9d9d9d",
@@ -35,6 +35,10 @@ const styles = {
         overflow: "hidden",
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+    },
+    textTop: {
+        color: 'red',
+        paddingRight: 10
     }
 
 };
@@ -49,27 +53,76 @@ class ArticleList extends Component {
         };
     }
 
-    onChange = (page) => {
-        console.log(page);
-        this.setState({
-            current: page,
-        });
+    componentDidMount() {
+        /*function throttle(fn, delay, mustRunDelay) {
+         var timer = null;
+         var t_start;
+         return function () {
+         var context = this, args = arguments, t_curr = +new Date();
+         clearTimeout(timer);
+         if (!t_start) {
+         t_start = t_curr;
+         }
+         if (t_curr - t_start >= mustRunDelay) {
+         fn.apply(context, args);
+         t_start = t_curr;
+         }
+         else {
+         timer = setTimeout(function () {
+         fn.apply(context, args);
+         }, delay);
+         }
+         };
+         }
 
-    };
+         window.addEventListener('scroll', () => throttle(this.loadMore(), 500, 1000), false);*/
+
+        /*
+         * 加载更多
+         * */
+
+    }
+
+
+    loadMore = () => {
+        console.log("---");
+        page++;
+        this.props.loadMore(page)
+
+
+    }
+
 
     render() {
-        const {isFetch, data} = this.props;
+        const {isFetch, data, page} = this.props;
+        console.log(page);
+        let list = [];
+        list.push(
+            data.map((item, i) => (
+                <Link key={i} to={'/Article/' + item.id}
+                      style={{textDecorationLine: 'none', textDecoration: 'none'}}>
+                    <ListItem primaryText={<Title title={item}/>}
+                              secondaryText={<Info info={item}/>}
+                              leftAvatar={<Avatar style={styles.avatar}
+                                                  src={item.author.avatar_url}/>}/>
+                    <Divider inset={true}/>
+                </Link>
+            ))
+        );
         return (
             <div>
                 <Paper zDepth={2}>
                     {
-                        isFetch ?
+                        (isFetch && page === 0) ?
                             <div style={{textAlign: 'center', paddingTop: 50}}><CircularProgress size={50}/>
                             </div> :
-                            <List>
+                            <List style={{
+                                paddingBottom: '2rem',
+                                position: 'relative'
+                            }}>
                                 {data.map((item, i) => (
                                     <Link key={i} to={'/Article/' + item.id}
-                                          style={{textDecorationLine: 'none'}}>
+                                          style={{textDecorationLine: 'none', textDecoration: 'none'}}>
                                         <ListItem primaryText={<Title title={item}/>}
                                                   secondaryText={<Info info={item}/>}
                                                   leftAvatar={<Avatar style={styles.avatar}
@@ -77,13 +130,19 @@ class ArticleList extends Component {
                                         <Divider inset={true}/>
                                     </Link>
                                 ))}
-                              {/*  <Pagination
-                                    style={{marginTop: 10, marginLeft: 10}}
-                                    onChange={this.onChange}
-                                    current={this.state.current}
-                                    total={800}
-                                    showLessItems
-                                />*/}
+                                <InfiniteLoader
+                                    visitStyle={{
+                                        position: 'absolute',
+                                        width: '100%',
+                                        bottom: '10rem',
+                                        height: '10rem'
+                                    }}
+                                    onVisited={this.loadMore}/>
+
+                                {
+                                    (isFetch && page > 1) &&
+                                    <ListItem primaryText="加载中..." style={{textAlign: "center"}}/>
+                                }
                             </List>
                     }
                 </Paper>
@@ -94,8 +153,8 @@ class ArticleList extends Component {
 
 const Title = (props) => (
     <div style={styles.primaryText}>
-        {props.title.top && <span style={{color: 'red', paddingRight: 10}}>顶</span>}
-        {props.title.good && <span style={{color: 'red', paddingRight: 10}}>精</span>}
+        {props.title.top && <span style={styles.textTop}>顶</span>}
+        {props.title.good && <span style={styles.textTop}>精</span>}
         <span style={styles.title}>{props.title.title}</span>
     </div>
 );
@@ -118,6 +177,7 @@ Info.propTypes = {
 ArticleList.propTypes = {
     data: PropTypes.array.isRequired,
     isFetch: PropTypes.bool.isRequired,
+    loadMore: PropTypes.func
 };
 ArticleList.defaultProps = {};
 export default ArticleList;

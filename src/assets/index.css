@@ -7,3 +7,10 @@ body {
 ul {
   margin: 0;
   padding: 0; }
+
+html {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none; }
+
+html::-webkit-scrollbar {
+  width: 0px; }

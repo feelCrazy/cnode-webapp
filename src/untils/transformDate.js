@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /**
  * Created by ming on 2017/3/21
  */
