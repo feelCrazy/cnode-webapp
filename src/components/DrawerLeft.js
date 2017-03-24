@@ -14,7 +14,8 @@ import Job from 'material-ui/svg-icons/places/business-center';
 import Comment from 'material-ui/svg-icons/communication/comment';
 import Message from 'material-ui/svg-icons/social/notifications';
 import About from 'material-ui/svg-icons/action/info';
-
+import FlatButton from 'material-ui/FlatButton';
+import {browserHistory} from 'react-router';
 
 const styles = {
     avatar: {
@@ -35,6 +36,11 @@ const styles = {
 
 class DrawerLeft extends Component {
 
+    logout = () => {
+        window.localStorage.clear();
+        browserHistory.push('/')
+    };
+
     render() {
         const login = JSON.parse(window.localStorage.getItem("userAcc"));
         return (
@@ -45,13 +51,14 @@ class DrawerLeft extends Component {
                         onRequestChange={this.props.toggleDrawer}>
 
                     <div style={styles.avatar}>
-                        {
-                        }
                         <div style={{verticalAlign: "middle"}}>
                             {login ? <div>
                                     <Avatar src={login.avatarURL}
                                             size={50} style={{marginRight: 10}}/>
                                     <span style={styles.name}>{login.loginName}</span>
+                                    <div>
+                                        <FlatButton label="退出" onClick={this.logout}/>
+                                    </div>
                                 </div> :
                                 <Avatar size={50} backgroundColor={"#d8d8d8"}/>
                             }
