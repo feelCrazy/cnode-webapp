@@ -48,9 +48,14 @@ class DrawerLeft extends Component {
                         {
                         }
                         <div style={{verticalAlign: "middle"}}>
-                            <Avatar src={login.avatarURL}
-                                    size={50} style={{marginRight: 10}}/>
-                            <span style={styles.name}>{login.loginName}</span>
+                            {login ? <div>
+                                    <Avatar src={login.avatarURL}
+                                            size={50} style={{marginRight: 10}}/>
+                                    <span style={styles.name}>{login.loginName}</span>
+                                </div> :
+                                <Avatar style={50} backgroundColor={"#d8d8d8"}/>
+                            }
+
 
                         </div>
 
