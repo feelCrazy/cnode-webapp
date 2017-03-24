@@ -43,7 +43,6 @@ class HomePage extends Component {
 
     componentDidMount() {
         const {tab} = this.props.params;
-        console.log(tab);
         if (tab) {
             this.props.userAction.getArticle(tab);
         } else {
