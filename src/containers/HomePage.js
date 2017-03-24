@@ -106,7 +106,7 @@ class HomePage extends Component {
 
                 <DrawerLeft toggleDrawer={this.toggleDrawer}
                             openDrawer={this.state.open}
-                            width={300}
+                            width={250}
                 />
             </div>
         );
