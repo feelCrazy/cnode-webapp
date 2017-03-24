@@ -11,7 +11,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {browserHistory} from 'react-router';
 import NavigationBack from 'material-ui/svg-icons/navigation/arrow-back';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
-import New from 'material-ui/svg-icons/maps/near-me';
+// import New from 'material-ui/svg-icons/maps/near-me';
 
 
 const styles = {
@@ -61,7 +61,7 @@ class Header extends Component {
                         iconElementRight={userAcc !== null ?
                             <FlatButton label="新建"/> :
 
-                            <FlatButton label="LOGIN" onClick={this.login}/>}/>
+                            <FlatButton label="登录" onClick={this.login}/>}/>
             </div>
         );
     }

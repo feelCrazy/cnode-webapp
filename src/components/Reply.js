@@ -108,13 +108,13 @@ class Reply extends Component {
                                                  <sapn>回复于:{transformDate(item.create_at)}</sapn>
                                          </span>
                                         <span style={styles.replyThum}
-                                              onClick={this.handleClickUps.bind(this, i, item.id)}>
+                                              >
                                             <ThumbUp style={{
                                                 color: this.state.isSupported[i] ? 'red' : 'black',
                                                 height: 18
                                             }}/>
                                             <span
-                                                style={{verticalAlign: "bottom"}}>{this.state.supportNum[i]}</span>
+                                                style={{verticalAlign: "bottom"}}>{item.ups.length}</span>
                                      </span>
                                     </div>
                                 </div>
