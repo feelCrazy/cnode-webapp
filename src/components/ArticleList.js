@@ -1,7 +1,7 @@
 /**
  * Created by ming on 2017/3/2
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {ListItem, List} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
@@ -39,6 +39,12 @@ const styles = {
     textTop: {
         color: 'red',
         paddingRight: 10
+    },
+    more: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 10,
+        height: 10
     }
 
 };
@@ -53,53 +59,19 @@ class ArticleList extends Component {
         };
     }
 
-    componentDidMount() {
-        /*function throttle(fn, delay, mustRunDelay) {
-         var timer = null;
-         var t_start;
-         return function () {
-         var context = this, args = arguments, t_curr = +new Date();
-         clearTimeout(timer);
-         if (!t_start) {
-         t_start = t_curr;
-         }
-         if (t_curr - t_start >= mustRunDelay) {
-         fn.apply(context, args);
-         t_start = t_curr;
-         }
-         else {
-         timer = setTimeout(function () {
-         fn.apply(context, args);
-         }, delay);
-         }
-         };
-         }
-
-         window.addEventListener('scroll', () => throttle(this.loadMore(), 500, 1000), false);*/
-
-        /*
-         * 加载更多
-         * */
-
-    }
-
 
     loadMore = () => {
-        console.log("---");
         page++;
         this.props.loadMore(page)
-
-
-    }
+    };
 
 
     render() {
         const {isFetch, data, page} = this.props;
-        console.log(page);
         let list = [];
         list.push(
             data.map((item, i) => (
-                <Link key={i} to={'/Article/' + item.id}
+                <Link key={i} to={'/article/' + item.id}
                       style={{textDecorationLine: 'none', textDecoration: 'none'}}>
                     <ListItem primaryText={<Title title={item}/>}
                               secondaryText={<Info info={item}/>}
@@ -130,12 +102,7 @@ class ArticleList extends Component {
                                     </Link>
                                 ))}
                                 <InfiniteLoader
-                                    visitStyle={{
-                                        position: 'absolute',
-                                        width: '100%',
-                                        bottom: 10,
-                                        height: 10
-                                    }}
+                                    visitStyle={styles.more}
                                     onVisited={this.loadMore}/>
 
                                 {
@@ -158,7 +125,7 @@ const Title = (props) => (
     </div>
 );
 Title.propTypes = {
-    title: PropTypes.object
+    title: React.PropTypes.object
 };
 
 const Info = (props) => (
@@ -170,13 +137,14 @@ const Info = (props) => (
     </div>
 );
 Info.propTypes = {
-    info: PropTypes.object
+    info: React.PropTypes.object
 };
 
 ArticleList.propTypes = {
-    data: PropTypes.array.isRequired,
-    isFetch: PropTypes.bool.isRequired,
-    loadMore: PropTypes.func
+    data: React.PropTypes.array.isRequired,
+    isFetch: React.PropTypes.bool.isRequired,
+    loadMore: React.PropTypes.func,
+    page: React.PropTypes.number,
 };
 ArticleList.defaultProps = {};
 export default ArticleList;

@@ -1,14 +1,22 @@
 .main {
   padding: 20px; }
-
-.main p {
-  text-indent: 2em; }
-
-.main img {
-  display: block;
-  margin: 20px auto;
-  width: 600px; }
+  .main p {
+    text-indent: 2em; }
+  .main img {
+    display: block;
+    margin: 20px auto;
+    width: 600px; }
 
 @media (max-width: 750px) {
   .main img {
+    width: 90%; }
+  .reply img {
     width: 90%; } }
+
+.reply {
+  padding: 0 18px; }
+  .reply p {
+    text-indent: 2em; }
+  .reply img {
+    display: block;
+    margin: 20px auto; }

@@ -19,13 +19,24 @@ import About from 'material-ui/svg-icons/action/info';
 const styles = {
     avatar: {
         textAlign: 'center',
-        marginTop: 10
+        padding: 20
+    },
+    name: {
+        width: "80%",
+        display: "inline-block",
+        padding: 0,
+        overflow: "hidden",
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        color: '#1e49ff',
+        marginTop: 5
     }
 };
 
 class DrawerLeft extends Component {
 
     render() {
+        const login = JSON.parse(window.localStorage.getItem("userAcc"));
         return (
             <div>
                 <Drawer docked={false}
@@ -34,30 +45,50 @@ class DrawerLeft extends Component {
                         onRequestChange={this.props.toggleDrawer}>
 
                     <div style={styles.avatar}>
-                        <Avatar src={'https://avatars2.githubusercontent.com/u/16098072?v=3&s=400'}
-                                size={65}/>
-                    </div>
+                        {
+                        }
+                        <div style={{verticalAlign: "middle"}}>
+                            <Avatar src={login.avatarURL}
+                                    size={50} style={{marginRight: 10}}/>
+                            <span style={styles.name}>{login.loginName}</span>
 
-                    <List>
+                        </div>
+
+
+                    </div>
+                    <Divider/>
+                    <List style={{paddingLeft: 20}}>
                         <ListItem style={{borderWidth: 1, borderColor: '#eee',}}
-                                  onTouchTap={this.props.toggleDrawer} primaryText="全部"
-                                  leftIcon={<ActionHome/>}>
+                                  onTouchTap={this.props.toggleDrawer}
+                                  primaryText="全部"
+                                  leftIcon={<ActionHome/>}
+                                  containerElement={<Link to="/"/>}>
                         </ListItem>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="精华"
+                        <ListItem onTouchTap={this.props.toggleDrawer}
+                                  primaryText="精华"
                                   leftIcon={<Hot/>}
-                                  containerElement={<Link to="hot"/>}/>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="分享"
-                                  leftIcon={<Share/>}/>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="问答" leftIcon={<Job/>}/>
-                        <ListItem onTouchTap={this.props.toggleDrawer} primaryText="招聘"
-                                  leftIcon={<Comment/>}/>
+                                  containerElement={<Link to="/good"/>}/>
+                        <ListItem onTouchTap={this.props.toggleDrawer}
+                                  primaryText="分享"
+                                  leftIcon={<Share/>}
+                                  containerElement={<Link to="/share"/>}/>
+                        <ListItem onTouchTap={this.props.toggleDrawer}
+                                  primaryText="问答"
+                                  leftIcon={<Job/>}
+                                  containerElement={<Link to="/ask"/>}/>
+                        <ListItem onTouchTap={this.props.toggleDrawer}
+                                  primaryText="招聘"
+                                  leftIcon={<Comment/>}
+                                  containerElement={<Link to="/job"/>}/>
                         <Divider/>
                         {/*</List>
                          <List>*/}
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="消息"
-                                  leftIcon={<Message/>}/>
+                                  leftIcon={<Message/>}
+                        />
                         <ListItem onTouchTap={this.props.toggleDrawer} primaryText="关于"
-                                  leftIcon={<About/>}/>
+                                  leftIcon={<About/>}
+                                  containerElement={<Link to="/about/me"/>}/>
                     </List>
 
                 </Drawer>

@@ -14,7 +14,7 @@ let List = '';
 
 const styles = {
     main: {
-        paddingTop: 55,
+        paddingTop: 51,
     },
     primaryText: {
         fontWeight: "bold",
@@ -34,7 +34,7 @@ const styles = {
         paddingBottom: 10
     }
 };
-
+const tabArr = {undefined: '全部', share: '分享', job: '招聘', good: '精华', ask: '问答', about: '关于'};
 class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -42,8 +42,28 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        this.props.userAction.getArticle('all');
+        const {tab} = this.props.params;
+        console.log(tab);
+        if (tab) {
+            this.props.userAction.getArticle(tab);
+        } else {
+            this.props.userAction.getArticle('all');
+        }
     }
+
+    componentDidUpdate(prevProps) {
+        let oldTab = prevProps.params.tab;
+        let newTab = this.props.params.tab;
+        if (newTab !== oldTab) {
+            if (newTab) {
+                this.props.userAction.getArticle(newTab);
+            } else {
+                this.props.userAction.getArticle('all');
+            }
+        }
+
+    }
+
 
     componentWillReceiveProps(newProps) {
         const {articleState} = newProps;
@@ -69,13 +89,13 @@ class HomePage extends Component {
 
     render() {
         const {userState} = this.props;
+        const {tab} = this.props.params;
         // const info = JSON.parse(window.localStorage.getItem("userAcc"));
         return (
             <div>
                 <Header click={this.handleOpen}
-                        title="Home"
+                        title={tabArr[tab]}
                         isLogin={userState.isLogin}
-
                 />
                 <div style={styles.main}>
                     <div >
@@ -96,7 +116,8 @@ class HomePage extends Component {
 HomePage.propTypes = {
     userAction: React.PropTypes.object,
     userState: React.PropTypes.object,
-    articleState: React.PropTypes.object
+    articleState: React.PropTypes.object,
+    params: React.PropTypes.object,
 };
 HomePage.defaultProps = {};
 function mapStateToProps(state) {

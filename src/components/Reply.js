@@ -2,13 +2,15 @@
  * Created by ming on 2017/3/22
  */
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 // import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import  ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import transformDate from '../untils/transformDate';
 import Divider from 'material-ui/Divider';
+import NewComment from '../components/NewComment';
+
 
 const styles = {
     replyNum: {
@@ -16,6 +18,26 @@ const styles = {
         borderBottomColor: "#bfbfbf",
         borderTopColor: "#bfbfbf",
         padding: 10
+    },
+    container: {
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 15,
+        display: "flex",
+    },
+    replyInfo: {
+        paddingLeft: 10,
+        width: "100%"
+    },
+    replyTime: {
+        display: 'inline-block',
+        width: "60%",
+    },
+    replyThum: {
+        textAlign: 'right',
+        display: 'inline-block',
+        width: "40%",
+        verticalAlign: 'sub'
     }
 };
 class Reply extends Component {
@@ -38,31 +60,31 @@ class Reply extends Component {
             isSupported,
             supportNum
         });
-        this.props.action(id, login.accesstoken, index);
+        this.props.action.userClcikUps(id, login.accesstoken, index);
     };
     supportState = (replies, loginId) => {
         let isSupported = replies.map(reply => {
             return reply.ups.some(up => up === loginId)
         });
         let supportNum = replies.map(reply => reply.ups.length);
-        console.log(supportNum);
         this.setState({isSupported, supportNum})
     };
 
     componentWillReceiveProps(newProps) {
         const {reply} =newProps;
         const login = JSON.parse(window.localStorage.getItem("userAcc"));
-        if (reply.replies.length !== this.props.reply.replies) {
-            this.supportState(reply.replies, login.id)
+        if (reply.res.data.replies.length !== this.props.reply.res.data.replies) {
+            this.supportState(reply.res.data.replies, login.id)
         }
+
     }
 
+
     render() {
-        const {reply} = this.props;
-        const loginId = JSON.parse(window.localStorage.getItem("userAcc"));
+        const {reply, action} = this.props;
+        const login = JSON.parse(window.localStorage.getItem("userAcc"));
         // console.log(loginId.id);
-        // console.log(this.props);
-        const info = reply.replies;
+        const info = reply.res.data.replies;
         return (
             <div>
                 <div style={styles.replyNum}>
@@ -70,31 +92,22 @@ class Reply extends Component {
                 </div>
                 <Paper zDepth={2}>
                     {
-                        reply.replies.map((item, i) => (
+                        reply.res.data.replies.map((item, i) => (
                             <div key={i} style={{fontSize: 12}}>
-                                <div style={{
-                                    paddingLeft: 15,
-                                    paddingRight: 15,
-                                    paddingTop: 15,
-                                    display: "flex",
-                                }}>
-                                    <div style={{}}>
+                                <Divider/>
+                                <div style={styles.container}>
+                                    <div>
                                         <Avatar
                                             src={item.author.avatar_url}
                                             size={35}
                                             style={{borderRadius: 5}}/>
                                     </div>
-                                    <div style={{paddingLeft: 10, width: "100%"}}>
-                                         <span style={{display: 'inline-block', width: "60%"}}>
+                                    <div style={styles.replyInfo}>
+                                         <span style={styles.replyTime}>
                                               <span style={{paddingRight: 5}}>{item.author.loginname}</span>
-                                                 <sapn>回复于:{transformDate(item.create_at)}分钟前</sapn>
+                                                 <sapn>回复于:{transformDate(item.create_at)}</sapn>
                                          </span>
-                                        <span style={{
-                                            textAlign: 'right',
-                                            display: 'inline-block',
-                                            width: "40%",
-                                            verticalAlign: 'sub'
-                                        }}
+                                        <span style={styles.replyThum}
                                               onClick={this.handleClickUps.bind(this, i, item.id)}>
                                             <ThumbUp style={{
                                                 color: this.state.isSupported[i] ? 'red' : 'black',
@@ -105,15 +118,18 @@ class Reply extends Component {
                                      </span>
                                     </div>
                                 </div>
-                                <div className="markdown-text"
+                                <div className={"reply markdown-text"}
                                      dangerouslySetInnerHTML={{__html: item.content}}
-                                     style={{paddingLeft: 18, paddingRight: 18}}></div>
-
-                                <Divider/>
+                                     style={{
+                                         paddingLeft: 18, paddingRight: 18,
+                                         overflow: "hidden"
+                                     }}></div>
                             </div>
                         ))
                     }
-
+                    {
+                        login && <NewComment addComment={action.UserAddComment} id={reply.res.data.id}/>
+                    }
 
                 </Paper>
             </div>
@@ -121,6 +137,13 @@ class Reply extends Component {
     }
 }
 
-Reply.propTypes = {};
-Reply.defaultProps = {};
-export default Reply;
+Reply
+    .propTypes = {
+    reply: React.PropTypes.object,
+    action: React.PropTypes.object
+};
+Reply
+    .defaultProps = {};
+export
+default
+Reply;

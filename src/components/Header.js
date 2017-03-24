@@ -11,6 +11,8 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {browserHistory} from 'react-router';
 import NavigationBack from 'material-ui/svg-icons/navigation/arrow-back';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import New from 'material-ui/svg-icons/maps/near-me';
+
 
 const styles = {
     loginBtn: {
@@ -57,7 +59,8 @@ class Header extends Component {
                         onLeftIconButtonTouchTap={this.handleClick}
                         titleStyle={styles.title}
                         iconElementRight={userAcc !== null ?
-                            <Logged logout={this.logout}/> :
+                            <FlatButton label="新建"/> :
+
                             <FlatButton label="LOGIN" onClick={this.login}/>}/>
             </div>
         );
@@ -74,7 +77,7 @@ const Logged = (props) => (
             <MenuItem primaryText="Send feedback"/>
             <MenuItem primaryText="Settings"/>
             <MenuItem primaryText="Help"/>
-            <MenuItem primaryText="Sign out" onClick={props.logout}/>
+            <MenuItem primaryText="退出" onClick={props.logout}/>
         </IconMenu>
     </div>
 );
@@ -88,4 +91,8 @@ Header.propTypes = {
 Header.defaultProps = {
     goBack: false,
 };
+Logged.propTypes = {
+    logout: React.PropTypes.func
+};
+
 export default Header;

@@ -13,7 +13,8 @@ import {
     RECEIVE_DETAILS,
     RECEIVE_USERINFO,
     REQUEST_USERINFO,
-    RECEIVE_USERUPS
+    RECEIVE_USERUPS,
+    USER_ADDCOMMENT,
 } from '../actions/types';
 import axios from 'axios';
 // accesstoken: '199183d1-b722-4cc4-bdaa-5443b964f84c',
@@ -77,11 +78,17 @@ export const receiveUserInfo = (res) => ({
     res
 });
 
-export const receiveUps = (id, index,action) => ({
+export const receiveUps = (id, index, action) => ({
     type: RECEIVE_USERUPS,
     id,
     index,
     action
+});
+
+export const addComment = (id, res) => ({
+    type: USER_ADDCOMMENT,
+    id,
+    res
 });
 
 // 检查token
@@ -168,7 +175,21 @@ export const userClcikUps = (id, accesstoken, index) => {
             accesstoken: accesstoken
         }).then(res => {
             console.log(res);
-            dispatch(receiveUps(id, index,res.data))
+            dispatch(receiveUps(id, index, res.data))
+        })
+    }
+};
+
+
+// 新建评论
+export const UserAddComment = (id, accesstoken, reply) => {
+    return dispatch => {
+        axios.post('/topic/' + id + '/replies', {
+            content: reply,
+            accesstoken: accesstoken
+        }).then(res => {
+            console.log(res);
+            dispatch(addComment(id, res.data))
         })
     }
 };

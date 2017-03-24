@@ -12,17 +12,26 @@ import Header from '../components/Header';
 
 const styles = {
     main: {
-        width: "30%",
         textAlign: "center",
         margin: '0 auto',
-        paddingTop: 100
+        padding: 15,
+        paddingTop: 80,
     },
     unLine: {
         borderColor: '#ee1862'
     },
+    unLineSt: {
+        borderColor: "#00"
+    },
     login: {
         marginTop: 20
-    }
+    },
+    floatingLabelStyle: {
+        color: "#000"
+    },
+    floatingLabelFocusStyle: {
+        color: "#129e3d",
+    },
 };
 
 class Login extends Component {
@@ -70,11 +79,15 @@ class Login extends Component {
                 <Header click={this.handleBack}
                         title="Login" goBack={true}/>
                 <div style={styles.main}>
-                    <label>Key</label>
                     <TextField underlineFocusStyle={styles.unLine}
                                value={this.state.accesstoken}
                                name="accesstoken"
                                onChange={this.handleChange}
+                               hintText="Access Token"
+                               floatingLabelText="Access Token"
+                               floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                               floatingLabelStyle={styles.floatingLabelStyle}
+                               underlineStyle={styles.unLineSt}
                                fullWidth={true}/>
                     <RaisedButton style={styles.login}
                                   primary={true}

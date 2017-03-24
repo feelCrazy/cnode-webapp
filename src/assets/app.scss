@@ -16,4 +16,21 @@
       width: 90%;
     }
   }
+  .reply {
+    img {
+      width: 90%;
+    }
+  }
+}
+
+.reply {
+  padding: 0 18px;
+  p {
+    text-indent: 2em;
+  }
+  img {
+    display: block;
+    margin: 20px auto;
+    //width: 600px
+  }
 }

@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import  {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getDetails, userClcikUps} from '../actions/actions';
+import {getDetails, userClcikUps, UserAddComment} from '../actions/actions';
 import Header from '../components/Header';
 import Content from '../components/Content';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -36,7 +36,11 @@ class Article extends Component {
         const {detailsState, userAction} = newProps;
         if (detailsState.res) {
             content = <Content data={detailsState.res}/>;
-            reply = <Reply reply={detailsState.res.data} action={userAction.userClcikUps}/>
+            reply = <Reply reply={detailsState} action={userAction}/>
+        }
+        // 回复
+        if (detailsState.isCommented && this.props.detailsState.isCommented !== detailsState.isCommented) {
+            this.props.userAction.getDetails(this.props.params.id)
         }
     }
 
@@ -51,7 +55,7 @@ class Article extends Component {
         return (
             <div>
                 <Header title="文章" click={this.handleClick} goBack={true}/>
-                <div style={{paddingTop: 55}}>
+                <div style={{marginTop: 55}}>
                     { detailsState.isLoading ?
                         <div style={style.main}><CircularProgress style={style.progress} size={50}/>
                         </div> : content}
@@ -78,7 +82,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        userAction: bindActionCreators({getDetails, userClcikUps}, dispatch)
+        userAction: bindActionCreators({getDetails, userClcikUps, UserAddComment}, dispatch)
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Article);
