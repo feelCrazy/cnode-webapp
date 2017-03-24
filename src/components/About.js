@@ -13,7 +13,7 @@ class About extends Component {
     }
 
     handleClick = () => {
-        browserHistory.goBack();
+        browserHistory.push('/');
     };
 
     render() {
@@ -28,6 +28,14 @@ class About extends Component {
                         </h3>
                         <p className="font14">该项目是基于cnode社区提供的api，使用react.js重写的SPA。</p>
                     </div>
+
+                    <div className="bor_bottom">
+                        <h3 className="titleFont">当前版本</h3>
+                        <p className="font14">
+                                1.0 (完善中)
+                        </p>
+                    </div>
+
                     <div className="bor_bottom">
                         <h3 className="titleFont">源码地址</h3>
                         <p className="font14">

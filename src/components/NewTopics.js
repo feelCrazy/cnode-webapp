@@ -2,6 +2,8 @@
  * Created by ming on 2017/3/24
  */
 import React, {Component} from 'react';
+import Header from '../components/Header';
+import {browserHistory} from 'react-router';
 
 class NewTopics extends Component {
     constructor(props) {
@@ -9,21 +11,36 @@ class NewTopics extends Component {
         this.state = {};
     }
 
+    handleClick = () => {
+        browserHistory.goBack();
+    };
+
     render() {
         return (
-            <div>
-                <form>
-                    <select>
-                        <option>问答</option>
-                        <option>分享</option>
-                        <option>招聘</option>
-                    </select>
-                    <input placeholder="标题"/>
-                    <textarea placeholder="回复支持MarkDown语法"
-                    >
+            <div >
+                <Header title="新建"
+                        goBack={true}
+                        click={this.handleClick}/>
+                <div style={{textAlign: "center", marginTop: 56}}>
+                    <form>
+                        <div>
+                            <select>
+                                <option>问答</option>
+                                <option>分享</option>
+                                <option>招聘</option>
+                            </select>
+                        </div>
 
-                    </textarea>
-                </form>
+                        <div>
+                            <input placeholder="标题"/>
+                        </div>
+                        <div>
+                        <textarea placeholder="回复支持MarkDown语法">
+                        </textarea>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         );
     }

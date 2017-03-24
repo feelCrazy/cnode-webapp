@@ -59,8 +59,7 @@ class Header extends Component {
                         onLeftIconButtonTouchTap={this.handleClick}
                         titleStyle={styles.title}
                         iconElementRight={userAcc !== null ?
-                            <FlatButton label="新建"/> :
-
+                            <FlatButton label="新建" onTouchTap={() => browserHistory.push("/new/topics")}/> :
                             <FlatButton label="登录" onClick={this.login}/>}/>
             </div>
         );
