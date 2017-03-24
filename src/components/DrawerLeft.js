@@ -57,7 +57,9 @@ class DrawerLeft extends Component {
                                             size={50} style={{marginRight: 10}}/>
                                     <span style={styles.name}>{login.loginName}</span>
                                     <div>
-                                        <FlatButton label="退出" onClick={this.logout}/>
+                                        <FlatButton label="退出"
+                                                    onClick={this.logout}
+                                                    secondary={true}/>
                                     </div>
                                 </div> :
                                 <Avatar size={50} backgroundColor={"#d8d8d8"}/>
