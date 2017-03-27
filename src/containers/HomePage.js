@@ -48,6 +48,7 @@ class HomePage extends Component {
         } else {
             this.props.userAction.getArticle('all');
         }
+        window.scrollTo(0,0)
     }
 
     componentDidUpdate(prevProps) {

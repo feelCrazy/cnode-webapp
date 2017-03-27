@@ -30,6 +30,7 @@ class Article extends Component {
 
     componentDidMount() {
         this.props.userAction.getDetails(this.props.params.id)
+        window.scrollTo(0, 0)
     }
 
     componentWillReceiveProps(newProps) {
