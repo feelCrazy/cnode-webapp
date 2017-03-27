@@ -7,14 +7,13 @@ import {
     LOGIN_FAILURE,
     RECEIVE_TOPICS,
     REQUEST_TOPICS,
-    START_ADD_ARTICLE,
-    ADD_ARTICLE,
     REQUEST_DETAILS,
     RECEIVE_DETAILS,
     RECEIVE_USERINFO,
     REQUEST_USERINFO,
     RECEIVE_USERUPS,
     USER_ADDCOMMENT,
+    PUBLISH_TOPIC,
 } from '../actions/types';
 import axios from 'axios';
 // accesstoken: '199183d1-b722-4cc4-bdaa-5443b964f84c',
@@ -48,15 +47,7 @@ export const receiveTopics = (name, topics, page, limit) => ({
     limit
 });
 
-export const startAddArticle = (name) => ({
-    type: START_ADD_ARTICLE,
-    name
-});
 
-export const addArticle = (pram) => ({
-    type: ADD_ARTICLE,
-    pram
-});
 
 export const requestDetails = (id) => ({
     type: REQUEST_DETAILS,
@@ -89,6 +80,11 @@ export const addComment = (id, res) => ({
     type: USER_ADDCOMMENT,
     id,
     res
+});
+
+export const addTopiccs = (id, success) => ({
+    type: PUBLISH_TOPIC,
+    success
 });
 
 // 检查token
@@ -156,13 +152,12 @@ export const getUserInfo = (name) => {
 };
 
 // 添加帖子
-export const userAddArticle = (pram) => {
+export const userAddArticle = (accesstoken, title, tab, content) => {
     return dispatch => {
-        dispatch(startAddArticle());
-        axios.post('/topics/update', pram)
+        axios.post('/topics/', {accesstoken: accesstoken, title: title, tab: tab, content: content})
             .then(res => {
                 console.log(res);
-                dispatch(addArticle(res.data))
+                dispatch(addTopiccs(res.data.topic_id, res.data.success))
             })
             .catch(err => console.log(err))
     }

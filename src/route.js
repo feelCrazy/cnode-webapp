@@ -7,8 +7,8 @@ import {Route, IndexRoute}  from 'react-router';
 import App from './App';
 
 /*
-* 代码分拆
-* */
+ * 代码分拆
+ * */
 const homeScreen = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./containers/HomePage').default);
@@ -33,8 +33,15 @@ const aboutScreen = (location, cb) => {
 };
 const newScreen = (location, cb) => {
     require.ensure([], require => {
-        cb(null, require('./components/NewTopics').default);
+        cb(null, require('./containers/NewTopics').default);
     }, 'Index');
+};
+
+const isLogin = (nextState, replace) => {
+    const info = JSON.parse(window.localStorage.getItem("userAcc"));
+    if (!info) {
+        replace('/')
+    }
 };
 
 
@@ -45,7 +52,7 @@ const route = (
         <Route path="article/:id" getComponent={articleScreen}/>
         <Route path="/:tab" getComponent={homeScreen}/>
         <Route path="/about/me" getComponent={aboutScreen}/>
-        <Route path="/new/topics" getComponent={newScreen}/>
+        <Route path="/new/topics" getComponent={newScreen} onEnter={isLogin}/>
     </Route>
 );
 export default route;

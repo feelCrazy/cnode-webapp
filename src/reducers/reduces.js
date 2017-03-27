@@ -7,14 +7,13 @@ import {
     LOGIN_FAILURE,
     REQUEST_TOPICS,
     RECEIVE_TOPICS,
-    START_ADD_ARTICLE,
-    ADD_ARTICLE,
     REQUEST_DETAILS,
     RECEIVE_DETAILS,
     RECEIVE_USERINFO,
     REQUEST_USERINFO,
     RECEIVE_USERUPS,
     USER_ADDCOMMENT,
+    PUBLISH_TOPIC
 } from '../actions/types';
 const initialState = {isLogin: false};
 
@@ -74,12 +73,10 @@ export const articleDetailsReduce = (state = {isLoading: false}, action) => {
 };
 
 // 添加文章
-export const addArticleReduce = (state = {isAdd: false}, action) => {
+export const addArticleReduce = (state = {success: false}, action) => {
     switch (action.type) {
-        case START_ADD_ARTICLE:
-            return {...state, isAdd: true};
-        case ADD_ARTICLE:
-            return {...state, isAdd: false, res: action.pram};
+        case PUBLISH_TOPIC:
+            return {...state, id: action.id, success: action.success};
         default:
             return state;
     }
