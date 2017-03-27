@@ -77,7 +77,7 @@ class Login extends Component {
         return (
             <div>
                 <Header click={this.handleBack}
-                        title="Login" goBack={true}/>
+                        title="登录" goBack={true}/>
                 <div style={styles.main}>
                     <TextField underlineFocusStyle={styles.unLine}
                                value={this.state.accesstoken}
