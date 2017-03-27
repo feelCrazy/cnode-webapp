@@ -21,7 +21,7 @@ const styles = {
     },
     select: {
         display: "inline-block",
-        width: "50%",
+        width: "calc(100% - 155px)",
         minWidth: "40%",
         fontSize: 16,
     },
@@ -75,7 +75,7 @@ class NewTopics extends Component {
     handleAdd = () => {
         const title = this.textAdd.value;
         const content = this.textArea.value;
-        const s = this.dd.value;
+        const tab = this.tab.value;
         const info = JSON.parse(window.localStorage.getItem("userAcc"));
         if (title.trim() === "" || title.trim().length < 10) {
             this.textAdd.focus();
@@ -88,7 +88,7 @@ class NewTopics extends Component {
                 isContent: false,
             });
         } else {
-            this.props.newTopicAction(info.accesstoken, title.trim(), content.trim());
+            this.props.newTopicAction(info.accesstoken, title.trim(), tab, content.trim());
         }
     };
 
@@ -104,7 +104,7 @@ class NewTopics extends Component {
                         <div style={{paddingTop: 15, paddingBottom: 10, paddingLeft: 10}}
                              className="bor_bottom">
                             选择主题：
-                            <select style={styles.select} ref={(input) => this.dd = input}>
+                            <select style={styles.select} ref={(select) => this.tab = select}>
                                 <option value="ask">问答</option>
                                 <option value="share">分享</option>
                                 <option value="job">招聘</option>

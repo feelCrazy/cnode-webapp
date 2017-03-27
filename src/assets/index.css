@@ -17,10 +17,11 @@ html::-webkit-scrollbar {
   width: 0px; }
 
 textarea {
-  resize: none; }
+  resize: none;
+  border-color: #d4d4d4; }
 
 .bor_bottom {
-  border-bottom: 1px solid #bebebe; }
+  border-bottom: 1px solid #d4d4d4; }
 
 .titleFont {
   color: #243443;
