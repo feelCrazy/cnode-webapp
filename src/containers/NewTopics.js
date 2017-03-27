@@ -29,7 +29,8 @@ const styles = {
     title: {
         border: 'none',
         width: "100%",
-        fontSize: 16
+        fontSize: 16,
+        lineHeight: "25px"
     },
     errTitle: {
         borderColor: 'red',
