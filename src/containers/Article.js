@@ -60,7 +60,7 @@ class Article extends Component {
                         <div style={style.main}><CircularProgress style={style.progress} size={50}/>
                         </div> : content}
                 </div>
-                {reply}
+                { detailsState.isLoading ? "" : reply}
 
             </div>
         );
