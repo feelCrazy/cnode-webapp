@@ -24,6 +24,7 @@ const styles = {
         width: "calc(100% - 155px)",
         minWidth: "40%",
         fontSize: 16,
+        padding: 2
     },
     title: {
         border: 'none',
