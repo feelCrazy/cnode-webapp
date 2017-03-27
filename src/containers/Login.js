@@ -34,6 +34,7 @@ const styles = {
     },
 };
 
+let err = '';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -43,7 +44,13 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        const {userState} = newProps
+        const {userState} = newProps;
+
+        if (userState.res) {
+            err = !userState.res.success ?
+                <h3 style={{color: "red"}}>{userState.res.response.data.error_msg}</h3> : "";
+        }
+
         if (userState.isLogin && userState.res !== undefined) {
             const accesstoken = this.state.accesstoken;
             const loginName = userState.res.loginname;
@@ -93,6 +100,7 @@ class Login extends Component {
                                   primary={true}
                                   onClick={this.clickLogin}
                                   label="提交"/>
+                    {err}
                 </div>
             </div>
         );

@@ -48,7 +48,6 @@ export const receiveTopics = (name, topics, page, limit) => ({
 });
 
 
-
 export const requestDetails = (id) => ({
     type: REQUEST_DETAILS,
     id
@@ -99,7 +98,7 @@ export const userLogin = (key) => {
             })
             .catch(err => {
                 console.log(err);
-                dispatch(fetchFailure(err.data))
+                dispatch(fetchFailure(err))
             })
     }
 };
@@ -125,7 +124,6 @@ export const getDetails = (id) => {
         dispatch(requestDetails(id));
         axios.get('/topic/' + id)
             .then(res => {
-                console.log(res);
                 dispatch(receiveDetails(res.data));
             })
             .catch(err => {
@@ -140,13 +138,11 @@ export const getUserInfo = (name) => {
         dispatch(requestUserInfo(name));
         axios.get('/user/' + name)
             .then(res => {
-                console.log(res);
                 dispatch(receiveUserInfo(res.data))
             })
             .catch(err => {
                 console.log(err);
             })
-
     }
 
 };
@@ -156,7 +152,6 @@ export const userAddArticle = (accesstoken, title, tab, content) => {
     return dispatch => {
         axios.post('/topics/', {accesstoken: accesstoken, title: title, tab: tab, content: content})
             .then(res => {
-                console.log(res);
                 dispatch(addTopiccs(res.data.topic_id, res.data.success))
             })
             .catch(err => console.log(err))
@@ -169,7 +164,6 @@ export const userClcikUps = (id, accesstoken, index) => {
         axios.post('/reply/' + id + '/ups', {
             accesstoken: accesstoken
         }).then(res => {
-            console.log(res);
             dispatch(receiveUps(id, index, res.data))
         })
     }
@@ -183,7 +177,6 @@ export const UserAddComment = (id, accesstoken, reply) => {
             content: reply,
             accesstoken: accesstoken
         }).then(res => {
-            console.log(res);
             dispatch(addComment(id, res.data))
         })
     }
