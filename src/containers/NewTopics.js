@@ -76,7 +76,6 @@ class NewTopics extends Component {
         const title = this.textAdd.value;
         const content = this.textArea.value;
         const s = this.dd.value;
-        console.log(s);
         const info = JSON.parse(window.localStorage.getItem("userAcc"));
         if (title.trim() === "" || title.trim().length < 10) {
             this.textAdd.focus();
@@ -89,15 +88,11 @@ class NewTopics extends Component {
                 isContent: false,
             });
         } else {
-            console.log("=====", title);
-            console.log("=====", content);
-            console.log("=====", s);
             this.props.newTopicAction(info.accesstoken, title.trim(), content.trim());
         }
     };
 
     render() {
-        console.log(this.props);
         return (
             <div >
                 <Header title="新建"
@@ -127,7 +122,7 @@ class NewTopics extends Component {
                         <div style={styles.topics}>
                             <textarea placeholder="回复支持MarkDown语法"
                                       style={this.state.isContent ? styles.content : styles.errContent}
-                                      rows="35"
+                                      rows="45"
                                       ref={(input) => this.textArea = input}/>
                         </div>
 
