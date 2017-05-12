@@ -8,7 +8,7 @@ import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
-import InfiniteLoader from 'react-infinite-loader';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 let page = 1;
 const styles = {
@@ -62,7 +62,12 @@ class ArticleList extends Component {
 
     loadMore = () => {
         page++;
-        this.props.loadMore(page)
+        console.log("page", page);
+        if (page >= 8) {
+            return
+        }
+        setTimeout(() => this.props.loadMore(page), 1500);
+
     };
 
 
@@ -91,24 +96,31 @@ class ArticleList extends Component {
                             <List style={{
                                 position: 'relative'
                             }}>
-                                {data.map((item, i) => (
-                                    <Link key={i} to={'/Article/' + item.id}
-                                          style={{textDecorationLine: 'none', textDecoration: 'none'}}>
-                                        <ListItem primaryText={<Title title={item}/>}
-                                                  secondaryText={<Info info={item}/>}
-                                                  leftAvatar={<Avatar style={styles.avatar}
-                                                                      src={item.author.avatar_url}/>}/>
-                                        <Divider inset={true}/>
-                                    </Link>
-                                ))}
-                                <InfiniteLoader
-                                    visitStyle={styles.more}
-                                    onVisited={this.loadMore}/>
 
-                                {
-                                    (isFetch && page > 1) &&
-                                    <ListItem primaryText="加载中..." style={{textAlign: "center"}}/>
-                                }
+                                {/*<InfiniteLoader
+                                 visitStyle={styles.more}
+                                 onVisited={this.loadMore}/>
+
+                                 {
+                                 (isFetch && page > 1) &&
+                                 <ListItem primaryText="加载中..." style={{textAlign: "center"}}/>
+                                 }*/}
+                                <InfiniteScroll
+                                    next={this.loadMore}
+                                    hasMore={true}
+                                    loader={<h3 style={{textAlign: "center"}}>加载中...</h3>}>
+                                    {data.map((item, i) => (
+                                        <Link key={i} to={'/Article/' + item.id}
+                                              style={{textDecorationLine: 'none', textDecoration: 'none'}}>
+                                            <ListItem primaryText={<Title title={item}/>}
+                                                      secondaryText={<Info info={item}/>}
+                                                      leftAvatar={<Avatar style={styles.avatar}
+                                                                          src={item.author.avatar_url}/>}/>
+                                            <Divider inset={true}/>
+                                        </Link>
+                                    ))}
+                                </InfiniteScroll>
+
                             </List>
                     }
                 </Paper>

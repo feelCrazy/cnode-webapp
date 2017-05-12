@@ -10,8 +10,6 @@ import DrawerLeft from '../components/DrawerLeft';
 import ArticleList from '../components/ArticleList';
 // import CircularProgress from 'material-ui/CircularProgress';
 
-let List = '';
-
 const styles = {
     main: {
         paddingTop: 51,
@@ -38,7 +36,10 @@ const tabArr = {undefined: '全部', share: '分享', job: '招聘', good: '精�
 class HomePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {open: false};
+        this.state = {
+            open: false,
+            list: ''
+        };
     }
 
     componentDidMount() {
@@ -48,7 +49,7 @@ class HomePage extends Component {
         } else {
             this.props.userAction.getArticle('all');
         }
-        window.scrollTo(0,0)
+        // window.scrollTo(0, 0)
     }
 
     componentDidUpdate(prevProps) {
@@ -67,8 +68,16 @@ class HomePage extends Component {
 
     componentWillReceiveProps(newProps) {
         const {articleState} = newProps;
-        List = <ArticleList data={articleState.topics} loadMore={this.loadMore}
-                            isFetch={articleState.isFetch} page={articleState.page}/>;
+        const list = <ArticleList data={articleState.topics}
+                                  loadMore={this.loadMore}
+                                  isFetch={articleState.isFetch}
+                                  page={articleState.page}/>;
+        this.setState({
+            list: list,
+        });
+
+        // List = <ArticleList data={articleState.topics} loadMore={this.loadMore}
+        //                     isFetch={articleState.isFetch} page={articleState.page}/>;
     }
 
     loadMore = (page) => {
@@ -99,7 +108,7 @@ class HomePage extends Component {
                 />
                 <div style={styles.main}>
                     <div >
-                        {List}
+                        {this.state.list}
                     </div>
 
                 </div>

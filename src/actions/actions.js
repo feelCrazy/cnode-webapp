@@ -109,7 +109,6 @@ export const getArticle = (name, page = 1, limit = 20,) => {
         dispatch(requestTopics(name));
         axios.get(`/topics?tab=${name}&page=${page}&limit=${limit}`)
             .then(res => {
-                console.log(res);
                 dispatch(receiveTopics(name, res.data, page, limit))
             })
             .catch(err => {
