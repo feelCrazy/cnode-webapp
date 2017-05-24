@@ -4,11 +4,12 @@
 import {compose, createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers/rootReducer';
-import createLogger from 'redux-logger'
+// import createLogger from 'redux-logger'
 export default createStore(
     rootReducer,
     compose(
-        applyMiddleware(thunk, createLogger()),
+//         applyMiddleware(thunk, createLogger()),
+        applyMiddleware(thunk),
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )
 )
